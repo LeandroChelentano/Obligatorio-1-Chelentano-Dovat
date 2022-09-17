@@ -9,6 +9,12 @@ public class Jugador {
     private short edad;
 
     // Geters y Seters
+    public short Id() {
+        return id;
+    }
+    public short Id(short aId) {
+        id = aId;
+    }
     public String Nombre() {
         return nombre;
     }
