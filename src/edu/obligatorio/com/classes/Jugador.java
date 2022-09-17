@@ -1,6 +1,7 @@
 package edu.obligatorio.com.classes;
 
 public class Jugador {
+    private short id;
     private String nombre;
     private String apellido;
     private String puesto;
@@ -31,7 +32,8 @@ public class Jugador {
 
     public Jugador() {}
 
-    public Jugador(String name, String surname, String position, short number, short age) {
+    public Jugador(short aId, String name, String surname, String position, short number, short age) {
+        id = aId;
         nombre = name;
         apellido = surname;
         puesto = position;

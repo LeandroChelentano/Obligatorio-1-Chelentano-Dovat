@@ -64,7 +64,7 @@ public class Front {
         System.out.print("\nEdad:\n> ");
         short age = (short) scanner.nextInt();
 
-        Jugador player = new Jugador(name, surname, position, number, age);
+        Jugador player = new Jugador((short) 0, name, surname, position, number, age);
 
         Controladora controladora = new Controladora();
         controladora.addPlayer(player);
@@ -81,7 +81,7 @@ public class Front {
         System.out.println("\nSeleccione el identificador del jugador a eliminar:");
         String id = getInput();
 
-        
+
     }
 
 

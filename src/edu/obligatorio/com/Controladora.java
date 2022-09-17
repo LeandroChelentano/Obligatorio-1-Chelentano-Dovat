@@ -17,4 +17,8 @@ public class Controladora {
     public void addPlayer(Jugador aJugador) {
         listaJugadores.add(aJugador);
     }
+
+    public void deletePlayer(Jugador aJugador) {
+        listaJugadores.add(aJugador);
+    }
 }
