@@ -1,4 +1,4 @@
-package edu.obligatorio.com;
+package edu.obligatorio.com.classes;
 
 public class Arbitro {
     private String nombre;

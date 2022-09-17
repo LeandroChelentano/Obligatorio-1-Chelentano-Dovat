@@ -1,7 +1,8 @@
-import edu.obligatorio.com.Jugador;
+package edu.obligatorio.com;
+
+import edu.obligatorio.com.classes.Jugador;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Controladora {
     private static ArrayList<Jugador> listaJugadores = new ArrayList<Jugador>();
@@ -9,4 +10,11 @@ public class Controladora {
     private static ArrayList<Jugador> listaPartidos = new ArrayList<Jugador>();
     private static ArrayList<Jugador> listaArbitros = new ArrayList<Jugador>();
 
+    public static ArrayList<Jugador> getJugadores() {
+        return  listaJugadores;
+    }
+
+    public void addPlayer(Jugador aJugador) {
+        listaJugadores.add(aJugador);
+    }
 }

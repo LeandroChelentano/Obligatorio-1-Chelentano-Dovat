@@ -1,6 +1,4 @@
-package edu.obligatorio.com;
-
-import edu.obligatorio.com.DT;
+package edu.obligatorio.com.classes;
 
 import java.util.Date;
 
