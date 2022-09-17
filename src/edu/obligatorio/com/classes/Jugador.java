@@ -12,7 +12,7 @@ public class Jugador {
     public short Id() {
         return id;
     }
-    public short Id(short aId) {
+    public void Id(short aId) {
         id = aId;
     }
     public String Nombre() {

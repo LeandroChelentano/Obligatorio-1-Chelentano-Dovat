@@ -7,6 +7,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Front {
+    private static Controladora controladora = new Controladora();
+
     private static Scanner scanner = new Scanner(System.in);
     private static boolean running = true;
 
@@ -66,7 +68,6 @@ public class Front {
 
         Jugador player = new Jugador((short) 0, name, surname, position, number, age);
 
-        Controladora controladora = new Controladora();
         controladora.addPlayer(player);
     }
 
@@ -81,7 +82,7 @@ public class Front {
         System.out.println("\nSeleccione el identificador del jugador a eliminar:");
         String id = getInput();
 
-
+        controladora.deletePlayer(Short.valueOf(id));
     }
 
 
