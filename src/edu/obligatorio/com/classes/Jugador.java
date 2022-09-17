@@ -26,7 +26,7 @@ public class Jugador {
 
     @Override
     public String toString() {
-        return "El nombre es " + nombre + apellido + ", su edad es " + edad + " y juega en el numero " + numero + ".";
+        return "El nombre es " + nombre + " " + apellido + ", su edad es " + edad + " y juega en " + puesto + " con el numero " + numero + ".";
     }
 
     public Jugador() {}

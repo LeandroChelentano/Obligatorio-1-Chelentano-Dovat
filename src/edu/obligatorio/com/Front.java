@@ -11,7 +11,7 @@ public class Front {
     private static boolean running = true;
 
     public static void main(String[] args) {
-        System.out.println("Bienvenido!\n");
+        System.out.println("Bienvenido!\nObligatorio realizado por: \n\t- Leandro Chelentano\n\t- Guadalupe Dovat");
 
         while (running)
             showMenu();
@@ -20,19 +20,14 @@ public class Front {
     }
 
     public static void showMenu() {
-        System.out.println("Menu:");
+        System.out.println("\nMenu:");
         System.out.println("1- Nuevo jugador");
         System.out.println("2- Eliminar jugador");
         System.out.println("3- Listar jugadores");
 
-        System.out.println("0- Salir (Perdida de datos)");
+        System.out.println("\n0- Salir (Perdida de datos)");
 
-        System.out.print("\n\t> ");
-        String option = scanner.next();
-
-
-
-        switch (option) {
+        switch (getInput()) {
             case "1":
                 newPlayer();
                 break;
@@ -51,21 +46,22 @@ public class Front {
         }
     }
 
+    public static String getInput() {
+        System.out.print("\n\t> ");
+        return scanner.next();
+    }
+
     public static void newPlayer() {
         System.out.print("\nNombre:\n> ");
         scanner.nextLine();
         String name = scanner.nextLine();
         System.out.print("\nApellido:\n> ");
-        scanner.nextLine();
         String surname = scanner.nextLine();
         System.out.print("\nPuesto:\n> ");
-        scanner.nextLine();
         String position = scanner.nextLine();
         System.out.print("\nNúmero:\n> ");
-        scanner.nextLine();
         short number = (short) scanner.nextInt();
         System.out.print("\nEdad:\n> ");
-        scanner.nextLine();
         short age = (short) scanner.nextInt();
 
         Jugador player = new Jugador(name, surname, position, number, age);
@@ -75,12 +71,17 @@ public class Front {
     }
 
     public static void listar(Object[] lista) {
+        System.out.println("\nListado:");
         for (int i = 0; i < lista.length; i++)
             System.out.println(i+1 + ": " + lista[i].toString());
     }
 
     public static void deletePlayer() {
+        listar(Controladora.getJugadores().toArray());
+        System.out.println("\nSeleccione el identificador del jugador a eliminar:");
+        String id = getInput();
 
+        
     }
 
 
