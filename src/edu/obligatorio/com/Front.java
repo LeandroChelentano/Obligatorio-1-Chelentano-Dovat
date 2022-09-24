@@ -73,8 +73,8 @@ public class Front {
 
     public static void listar(Object[] lista) {
         System.out.println("\nListado:");
-        for (int i = 0; i < lista.length; i++)
-            System.out.println(i+1 + ": " + lista[i].toString());
+        for (Object obj : lista)
+            System.out.println(obj.toString());
     }
 
     public static void deletePlayer() {
@@ -84,6 +84,4 @@ public class Front {
 
         controladora.deletePlayer(Short.valueOf(id));
     }
-
-
 }
