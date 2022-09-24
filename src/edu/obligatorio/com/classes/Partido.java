@@ -33,7 +33,16 @@ public class Partido {
     public int MinutosJugados() {return minutosJugados;}
     @Override
     public String toString() {
-        return "[" + id + "] Estadio \"" + estadio + "\", " + fecha + " " + hora + " - Clima: " + clima;}
+        return "[" + id + "] Estadio \"" + estadio + "\", " + fecha + " " + hora + " - Clima: " + clima + (jugando ? " [JUGANDO]" : "") + (terminado ? " [TERMINADO]" : "");}
+
+    public void Start() {
+        jugando = true;
+    }
+
+    public void End() {
+        jugando = false;
+        terminado = true;
+    }
 
     public Partido() {}
     public Partido(short Id, String Estadio, String Fecha, String Hora, String Clima) {
