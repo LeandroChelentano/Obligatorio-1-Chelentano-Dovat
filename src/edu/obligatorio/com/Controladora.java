@@ -1,18 +1,24 @@
 package edu.obligatorio.com;
 
+import edu.obligatorio.com.classes.Arbitro;
+import edu.obligatorio.com.classes.DT;
 import edu.obligatorio.com.classes.Jugador;
+import edu.obligatorio.com.classes.Partido;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Controladora {
     private static ArrayList<Jugador> listaJugadores = new ArrayList<Jugador>();
-    private static ArrayList<Jugador> listaDTs = new ArrayList<Jugador>();
-    private static ArrayList<Jugador> listaPartidos = new ArrayList<Jugador>();
-    private static ArrayList<Jugador> listaArbitros = new ArrayList<Jugador>();
+    private static ArrayList<DT> listaDTs = new ArrayList<DT>();
+    private static ArrayList<Partido> listaPartidos = new ArrayList<Partido>();
+    private static ArrayList<Arbitro> listaArbitros = new ArrayList<Arbitro>();
 
     public static ArrayList<Jugador> getJugadores() {
         return listaJugadores;
+    }
+    public static ArrayList<Partido> getPartidos() {
+        return listaPartidos;
     }
 
     public Jugador buscarJugadorPorId(short aId) {
@@ -22,7 +28,14 @@ public class Controladora {
         return null;
     }
 
-    public short getNextId() {
+    public Partido buscarPartidoPorId(short aId) {
+        for (int i = 0; i < listaPartidos.size(); i++)
+            if (listaPartidos.get(i).Id() == aId) return listaPartidos.get(i);
+
+        return null;
+    }
+
+    public short getNextPlayerId() {
         short max = 0;
         for (int i = 0; i < listaJugadores.size(); i++) {
             short id = listaJugadores.get(i).Id();
@@ -32,7 +45,7 @@ public class Controladora {
     }
 
     public void addPlayer(Jugador aJugador) {
-        aJugador.Id(getNextId());
+        aJugador.Id(getNextPlayerId());
         listaJugadores.add(aJugador);
     }
 
@@ -40,5 +53,25 @@ public class Controladora {
         Jugador jugador = buscarJugadorPorId(aId);
         if (jugador != null)
             listaJugadores.remove(jugador);
+    }
+
+    public short getNextMatchId() {
+        short max = 0;
+        for (int i = 0; i < listaPartidos.size(); i++) {
+            short id = listaPartidos.get(i).Id();
+            if (id > max) max = id;
+        }
+        return max++;
+    }
+
+    public void addMatch(Partido aPartido) {
+        aPartido.Id(getNextMatchId());
+        listaPartidos.add(aPartido);
+    }
+
+    public void deleteMatch(short aId) {
+        Partido partido = buscarPartidoPorId(aId);
+        if (partido != null)
+            listaPartidos.remove(partido);
     }
 }

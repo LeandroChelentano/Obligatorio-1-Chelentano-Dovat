@@ -18,7 +18,7 @@ public class Arbitro {
 
     @Override
     public String toString() {
-        return "El nombre es " + nombre   + apellido + ", en el puesto " + puesto + ".";}
+        return "El nombre es " + nombre + " " + apellido + ", en el puesto " + puesto + ".";}
 
     public Arbitro() {}
     public Arbitro(String name, String surname, String puest) {

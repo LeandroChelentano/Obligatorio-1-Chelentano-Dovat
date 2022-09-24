@@ -3,10 +3,10 @@ package edu.obligatorio.com.classes;
 import java.util.Date;
 
 public class Partido {
-    private int id;
+    private short id;
     private String estadio;
-    private Date fecha;
-    private int hora;
+    private String fecha;
+    private String hora;
     private String clima;
     private boolean jugando = false;
     private boolean terminado = false;
@@ -22,20 +22,21 @@ public class Partido {
 
     private Arbitro[] arbitros = new Arbitro[3];
 
-    public int Id() {return id;}
+    public void Id(short aId) {id = aId;}
+    public short Id() {return id;}
     public String Estadio() {return estadio;}
-    public Date Fecha() {return fecha;}
-    public int Hora() {return hora;}
+    public String Fecha() {return fecha;}
+    public String Hora() {return hora;}
     public String Clima() {return clima;}
     public boolean Jugando() {return jugando;}
     public boolean Terminado() {return terminado;}
     public int MinutosJugados() {return minutosJugados;}
     @Override
     public String toString() {
-        return "El ID del partido es " + id   + " en el Estadio " + estadio + ", fecha  " + fecha + " Hora" + hora + " Clima " + clima + ".";}
+        return "[" + id + "] Estadio \"" + estadio + "\", " + fecha + " " + hora + " - Clima: " + clima;}
 
     public Partido() {}
-    public Partido(int Id, String Estadio, Date Fecha, int Hora, String Clima) {
+    public Partido(short Id, String Estadio, String Fecha, String Hora, String Clima) {
         id = Id;
         estadio = Estadio;
         fecha = Fecha;

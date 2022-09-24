@@ -1,6 +1,7 @@
 package edu.obligatorio.com;
 
 import edu.obligatorio.com.classes.Jugador;
+import edu.obligatorio.com.classes.Partido;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -26,6 +27,9 @@ public class Front {
         System.out.println("1- Nuevo jugador");
         System.out.println("2- Eliminar jugador");
         System.out.println("3- Listar jugadores");
+        System.out.println("4- Nuevo partido");
+        System.out.println("5- Eliminar partido");
+        System.out.println("6- Listar Partidos");
 
         System.out.println("\n0- Salir (Perdida de datos)");
 
@@ -38,6 +42,15 @@ public class Front {
                 break;
             case "3":
                 listar(Controladora.getJugadores().toArray());
+                break;
+            case "4":
+                newMath();
+                break;
+            case "5":
+                deleteMatch();
+                break;
+            case "6":
+                listar(Controladora.getPartidos().toArray());
                 break;
             case "0":
                 running = false;
@@ -83,5 +96,29 @@ public class Front {
         String id = getInput();
 
         controladora.deletePlayer(Short.valueOf(id));
+    }
+
+    public static void newMath() {
+        System.out.print("\nEstadio:\n> ");
+        scanner.nextLine();
+        String estadio = scanner.nextLine();
+        System.out.print("\nFecha:\n> ");
+        String fecha = scanner.nextLine();
+        System.out.print("\nHora:\n> ");
+        String hora = scanner.nextLine();
+        System.out.print("\nClima:\n> ");
+        String clima = scanner.nextLine();
+
+        Partido partido = new Partido((short) 0, estadio, fecha, hora, clima);
+
+        controladora.addMatch(partido);
+    }
+
+    public static void deleteMatch() {
+        listar(Controladora.getPartidos().toArray());
+        System.out.println("\nSeleccione el identificador del partido a eliminar:");
+        String id = getInput();
+
+        controladora.deleteMatch(Short.valueOf(id));
     }
 }
