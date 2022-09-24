@@ -49,27 +49,31 @@ public class Controladora {
 
 //    #region idGen
     public short getNextPlayerId() {
+        if (listaJugadores.size() == 0) return 0;
+
         short max = 0;
-        for (Jugador j : listaJugadores) {
+        for (Jugador j : listaJugadores)
             if (j.Id() > max) max = j.Id();
-        }
-        return (short) ((short) max+1);
+
+        return (short) (max+1);
     }
     public short getNextArbitroId() {
+        if (listaArbitros.size() == 0) return 0;
+
         short max = 0;
-        for (int i = 0; i < listaArbitros.size(); i++) {
-            short id = listaArbitros.get(i).Id();
-            if (id > max) max = id;
-        }
-        return max++;
+        for (Arbitro a : listaArbitros)
+            if (a.Id() > max) max = a.Id();
+
+        return (short) (max+1);
     }
     public short getNextMatchId() {
+        if (listaPartidos.size() == 0) return 0;
+
         short max = 0;
-        for (int i = 0; i < listaPartidos.size(); i++) {
-            short id = listaPartidos.get(i).Id();
-            if (id > max) max = id;
-        }
-        return max++;
+        for (Partido p : listaPartidos)
+            if (p.Id() > max) max = p.Id();
+
+        return (short) (max+1);
     }
 //    #endregion
 
