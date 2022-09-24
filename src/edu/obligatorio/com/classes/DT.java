@@ -20,4 +20,10 @@ public class DT {
     @Override
     public String toString() {
         return "El nombre es " + nombre   + apellido +  ".";}
+
+    public DT() {}
+    public DT(String name, String surname, short age) {
+        nombre = name;
+        apellido = surname;
+        edad = age;}
 }

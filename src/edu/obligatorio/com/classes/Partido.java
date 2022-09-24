@@ -22,4 +22,25 @@ public class Partido {
 
     private Arbitro[] arbitros = new Arbitro[3];
 
+    public int Id() {return id;}
+    public String Estadio() {return estadio;}
+    public Date Fecha() {return fecha;}
+    public int Hora() {return hora;}
+    public String Clima() {return clima;}
+    public boolean Jugando() {return jugando;}
+    public boolean Terminado() {return terminado;}
+    public int MinutosJugados() {return minutosJugados;}
+    @Override
+    public String toString() {
+        return "El ID del partido es " + id   + " en el Estadio " + estadio + ", fecha  " + fecha + " Hora" + hora + " Clima " + clima + ".";}
+
+    public Partido() {}
+    public Partido(int Id, String Estadio, Date Fecha, int Hora, String Clima) {
+        id = Id;
+        estadio = Estadio;
+        fecha = Fecha;
+        hora = Hora;
+        clima = Clima;
+    }
+
 }
