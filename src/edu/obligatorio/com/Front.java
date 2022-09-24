@@ -1,5 +1,6 @@
 package edu.obligatorio.com;
 
+import edu.obligatorio.com.classes.Arbitro;
 import edu.obligatorio.com.classes.Jugador;
 
 import java.util.ArrayList;
@@ -26,6 +27,9 @@ public class Front {
         System.out.println("1- Nuevo jugador");
         System.out.println("2- Eliminar jugador");
         System.out.println("3- Listar jugadores");
+        System.out.println("4- Nuevo Arbitro");
+        System.out.println("5- Eliminar Arbitro");
+        System.out.println("6- Listar Arbitro");
 
         System.out.println("\n0- Salir (Perdida de datos)");
 
@@ -39,6 +43,15 @@ public class Front {
             case "3":
                 listar(Controladora.getJugadores().toArray());
                 break;
+            case "4":
+                newArbitro();
+                break;
+            case "5":
+                deleteArbitro();
+                break;
+            case "6":
+                listar(Controladora.getArbitro().toArray());
+                break;
             case "0":
                 running = false;
                 break;
@@ -47,6 +60,8 @@ public class Front {
                 break;
         }
     }
+
+
 
     public static String getInput() {
         System.out.print("\n\t> ");
@@ -84,4 +99,37 @@ public class Front {
 
         controladora.deletePlayer(Short.valueOf(id));
     }
+
+    public static void newArbitro() {
+        System.out.print("\nNombre:\n> ");
+        scanner.nextLine();
+        String name = scanner.nextLine();
+        System.out.print("\nApellido:\n> ");
+        String surname = scanner.nextLine();
+        System.out.print("\nPuesto:\n> ");
+        String position = scanner.nextLine();
+
+
+        Arbitro pArbitro = new Arbitro((short) 0, name, surname, position);
+
+        controladora.addArbitro(pArbitro);
+    }
+    private static void deleteArbitro() {
+        listar(Controladora.getArbitro().toArray());
+        System.out.println("\nSeleccione el identificador del Arbitro a eliminar:");
+        String id = getInput();
+
+        controladora.deleteArbitro(Short.valueOf(id));
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

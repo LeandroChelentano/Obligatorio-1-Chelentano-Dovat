@@ -1,11 +1,18 @@
 package edu.obligatorio.com.classes;
 
 public class Arbitro {
+    private short id;
     private String nombre;
     private String apellido;
     private String puesto;
 
     // Geters y Seters
+    public short Id() {
+        return id;
+    }
+    public void Id(short pId) { id = pId;
+    }
+
     public String Nombre () {
         return nombre;
     }
@@ -18,13 +25,14 @@ public class Arbitro {
 
     @Override
     public String toString() {
-        return "El nombre es " + nombre   + apellido + ", en el puesto " + puesto + ".";}
+        return "El Id es "+id+" nombre es " + nombre   +" "+ apellido + ", en el puesto " + puesto + ".";}
 
     public Arbitro() {}
-    public Arbitro(String name, String surname, String puest) {
+    public Arbitro( short pId, String name, String surname, String position) {
+        id = pId;
         nombre = name;
         apellido = surname;
-        puesto = puest;
+        puesto = position;
     }
 
 
