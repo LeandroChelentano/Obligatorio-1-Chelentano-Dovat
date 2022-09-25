@@ -15,31 +15,31 @@ public class Controladora {
     private static ArrayList<Arbitro> listaArbitros = new ArrayList<Arbitro>();
 
 //    #region listGets
-    public static ArrayList<Jugador> getJugadores() {
+    public ArrayList<Jugador> getJugadores() {
         return listaJugadores;
     }
-    public static ArrayList<Partido> getPartidos() {
+    public ArrayList<Partido> getPartidos() {
         return listaPartidos;
     }
-    public static ArrayList<Arbitro> getArbitro() {
+    public ArrayList<Arbitro> getArbitro() {
         return listaArbitros;
     }
 //    #endregion
 
 //    #region searchMethods
-    public Jugador buscarJugadorPorId(short aId) {
+    public Jugador searchPlayerById(short aId) {
         for (int i = 0; i < listaJugadores.size(); i++)
             if (listaJugadores.get(i).Id() == aId) return listaJugadores.get(i);
 
         return null;
     }
-    public Partido buscarPartidoPorId(short aId) {
+    public Partido searchMatchById(short aId) {
         for (int i = 0; i < listaPartidos.size(); i++)
             if (listaPartidos.get(i).Id() == aId) return listaPartidos.get(i);
 
         return null;
     }
-    public Arbitro buscarArbitroPorId(short pId) {
+    public Arbitro searchRefereeById(short pId) {
         for (int i = 0; i < listaArbitros.size(); i++)
             if (listaArbitros.get(i).Id() == pId) return listaArbitros.get(i);
 
@@ -57,7 +57,7 @@ public class Controladora {
 
         return (short) (max+1);
     }
-    public short getNextArbitroId() {
+    public short getNextRefereeId() {
         if (listaArbitros.size() == 0) return 0;
 
         short max = 0;
@@ -82,21 +82,20 @@ public class Controladora {
         aJugador.Id(getNextPlayerId());
         listaJugadores.add(aJugador);
     }
-
     public void deletePlayer(short aId) {
-        Jugador jugador = buscarJugadorPorId(aId);
+        Jugador jugador = searchPlayerById(aId);
         if (jugador != null)
             listaJugadores.remove(jugador);
     }
 //    #endregion
 
-//    region arbitros
+//    #region arbitros
     public void addArbitro(Arbitro pArbitro) {
-        pArbitro.Id(getNextArbitroId());
+        pArbitro.Id(getNextRefereeId());
        listaArbitros.add(pArbitro);
     }
     public void deleteArbitro(short pId) {
-        Arbitro Arbitro = buscarArbitroPorId(pId);
+        Arbitro Arbitro = searchRefereeById(pId);
         if (Arbitro != null)
             listaJugadores.remove(Arbitro);
     }
@@ -107,24 +106,38 @@ public class Controladora {
         aPartido.Id(getNextMatchId());
         listaPartidos.add(aPartido);
     }
-
     public void deleteMatch(short aId) {
-        Partido partido = buscarPartidoPorId(aId);
+        Partido partido = searchMatchById(aId);
         if (partido != null)
             listaPartidos.remove(partido);
     }
     public void startMatch(short aId) {
-        Partido partido = buscarPartidoPorId(aId);
+        Partido partido = searchMatchById(aId);
         if (partido != null)
             if (!partido.Jugando() && !partido.Terminado())
                 partido.Start();
     }
-
     public void endMatch(short aId) {
-        Partido partido = buscarPartidoPorId(aId);
+        Partido partido = searchMatchById(aId);
         if (partido != null)
             if (partido.Jugando())
                 partido.End();
+    }
+    public void assignPlayer(Partido match, Jugador player, String team, boolean isTitular) {
+        if (match.isPlayerPlaying(player))
+            return;
+
+        switch (team) {
+            case "1":
+                match.addPlayerToTeamOne(player, isTitular);
+                break;
+            case "2":
+                match.addPlayerToTeamTwo(player, isTitular);
+                break;
+        }
+    }
+    public void unassignPlayer(Partido match, Jugador player) {
+        match.removePlayerFromTeam(player);
     }
 //    #endregion
 }
