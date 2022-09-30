@@ -10,32 +10,37 @@ public class Arbitro {
     public short Id() {
         return id;
     }
-    public void Id(short pId) { id = pId;
+
+    public void Id(short pId) {
+        id = pId;
     }
 
-    public String Nombre () {
+    public String Nombre() {
         return nombre;
     }
-    public String Apellido (){
+
+    public String Apellido() {
         return apellido;
     }
-    public String Puesto (){
+
+    public String Puesto() {
         return puesto;
     }
 
     @Override
     public String toString() {
-        return "El Id es "+id+" nombre es " + nombre   +" "+ apellido + ", en el puesto " + puesto + ".";}
+        return "El Id es " + id + " su nombre es " + nombre + " " + apellido + ", en el puesto " + puesto + ".";
+    }
 
-    public Arbitro() {}
-    public Arbitro( short pId, String name, String surname, String position) {
+    public Arbitro() {
+    }
+
+    public Arbitro(short pId, String name, String surname, String position) {
         id = pId;
         nombre = name;
         apellido = surname;
         puesto = position;
     }
-
-
 
 
 }

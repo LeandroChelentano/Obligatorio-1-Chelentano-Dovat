@@ -1,6 +1,7 @@
 package edu.obligatorio.com;
 
 import edu.obligatorio.com.classes.Arbitro;
+import edu.obligatorio.com.classes.DT;
 import edu.obligatorio.com.classes.Jugador;
 import edu.obligatorio.com.classes.Partido;
 
@@ -32,14 +33,17 @@ public class Front {
         System.out.println(" 4- Nuevo Arbitro");
         System.out.println(" 5- Eliminar Arbitro");
         System.out.println(" 6- Listar Arbitro");
-        System.out.println(" 7- Nuevo partido");
-        System.out.println(" 8- Eliminar partido");
-        System.out.println(" 9- Listar Partidos");
-        System.out.println("10- Iniciar partido");
-        System.out.println("11- Terminar Partido");
-        System.out.println("12- Asignar jugador a partido");
-        System.out.println("13- Remover jugador de partido");
-        System.out.println("14- Mostrar asignaciones de partido");
+        System.out.println(" 7- Nuevo DT");
+        System.out.println(" 8- Eliminar DT");
+        System.out.println(" 9- Listar DT");
+        System.out.println(" 10- Nuevo partido");
+        System.out.println(" 11- Eliminar partido");
+        System.out.println(" 12- Listar Partidos");
+        System.out.println(" 13- Iniciar partido");
+        System.out.println(" 14- Terminar Partido");
+        System.out.println(" 15- Asignar jugador a partido");
+        System.out.println(" 16- Remover jugador de partido");
+        System.out.println(" 17- Mostrar asignaciones de partido");
 
         System.out.println("\n0- Salir (Perdida de datos)");
 
@@ -63,27 +67,36 @@ public class Front {
                 list(controladora.getArbitro().toArray());
                 break;
             case "7":
-                newMatch();
+                newDT();
                 break;
             case "8":
-                deleteMatch();
+                deleteDT();
                 break;
             case "9":
-                list(controladora.getPartidos().toArray());
+                list(controladora.getDT().toArray());
                 break;
             case "10":
-                startMatch();
+                newMatch();
                 break;
             case "11":
-                endMatch();
+                deleteMatch();
                 break;
             case "12":
-                assignPlayer();
+                list(controladora.getPartidos().toArray());
                 break;
             case "13":
-                unassignPlayer();
+                startMatch();
                 break;
             case "14":
+                endMatch();
+                break;
+            case "15":
+                assignPlayer();
+                break;
+            case "16":
+                unassignPlayer();
+                break;
+            case "17":
                 list(controladora.getPartidos().toArray());
                 System.out.println("Escoja un partido:");
                 Partido match = controladora.searchMatchById(Short.parseShort(getInput()));
@@ -182,6 +195,31 @@ public class Front {
         String id = getInput();
 
         controladora.deleteArbitro(Short.parseShort(id));
+    }
+//    #endregion
+
+    //    #region DT
+    public static void newDT() {
+        System.out.print("\nNombre:\n> ");
+        scanner.nextLine();
+        String name = scanner.nextLine();
+        System.out.print("\nApellido:\n> ");
+        String surname = scanner.nextLine();
+        System.out.print("\nEdad:\n> ");
+        short age = (short) scanner.nextInt();
+
+
+
+        DT pDT = new DT((short) 0, name, surname, age );
+
+        controladora.addDT(pDT);
+    }
+    public static void deleteDT() {
+        list(controladora.getDT().toArray());
+        System.out.println("\nSeleccione el identificador del DT a eliminar:");
+        String id = getInput();
+
+        controladora.deleteDT(Short.parseShort(id));
     }
 //    #endregion
 
