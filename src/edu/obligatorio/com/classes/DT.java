@@ -30,7 +30,7 @@ public class DT {
 
     @Override
     public String toString() {
-        return "El Id es " + id + " su nombre es " + nombre + apellido + " y su edad es " + edad + ".";
+        return "[" + id + "] El nombre es " + nombre + " " + apellido + " y su edad es " + edad + ".";
     }
 
     public DT() {

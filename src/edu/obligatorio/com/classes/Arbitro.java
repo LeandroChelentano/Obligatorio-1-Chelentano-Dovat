@@ -29,7 +29,7 @@ public class Arbitro {
 
     @Override
     public String toString() {
-        return "El Id es " + id + " su nombre es " + nombre + " " + apellido + ", en el puesto " + puesto + ".";
+        return "[" + id + "] El nombre es " + nombre + " " + apellido + ", en el puesto " + puesto + ".";
     }
 
     public Arbitro() {
