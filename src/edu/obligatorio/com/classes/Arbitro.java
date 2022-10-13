@@ -1,45 +1,33 @@
 package edu.obligatorio.com.classes;
 
-public class Arbitro {
-    private short id;
-    private String nombre;
-    private String apellido;
+
+public class Arbitro extends Persona {
+
+
     private String puesto;
 
     // Geters y Seters
-    public short Id() {
-        return id;
-    }
 
-    public void Id(short pId) {
-        id = pId;
-    }
 
-    public String Nombre() {
-        return nombre;
-    }
-
-    public String Apellido() {
-        return apellido;
-    }
-
-    public String Puesto() {
+    String getPuesto() {
         return puesto;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
     }
 
     @Override
     public String toString() {
-        return "[" + id + "] El nombre es " + nombre + " " + apellido + ", en el puesto " + puesto + ".";
+        return super.toString() + ", en el puesto " + puesto + ".";
     }
 
     public Arbitro() {
     }
 
-    public Arbitro(short pId, String name, String surname, String position) {
-        id = pId;
-        nombre = name;
-        apellido = surname;
-        puesto = position;
+    public Arbitro(short aId, String aName, String aSurname, String aPosition) {
+        super(aId, aName, aSurname);
+        puesto = aPosition;
     }
 
 

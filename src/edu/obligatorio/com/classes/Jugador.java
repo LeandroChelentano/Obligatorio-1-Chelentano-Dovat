@@ -1,49 +1,53 @@
 package edu.obligatorio.com.classes;
 
-public class Jugador {
-    private short id;
-    private String nombre;
-    private String apellido;
+public class Jugador extends Persona {
+
+
     private String puesto;
     private short numero;
     private short edad;
 
     // Geters y Seters
-    public short Id() {
-        return id;
-    }
-    public void Id(short aId) {
-        id = aId;
-    }
-    public String Nombre() {
-        return nombre;
-    }
-    public String Apellido() {
-        return apellido;
-    }
-    public String Puesto() {
+
+    public String getPuesto() {
         return puesto;
     }
-    public short Numero() {
+
+    public short getNumero() {
         return numero;
     }
-    public short Edad() {
+
+    public short getEdad() {
         return edad;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
+    }
+
+    @Override
+    public void setNombre(String nombre) {
+        super.setNombre(nombre);
+    }
+
+    @Override
+    public void setApellido(String apellido) {
+        super.setApellido(apellido);
     }
 
     @Override
     public String toString() {
-        return "[" + id + "] El nombre es " + nombre + " " + apellido + ", su edad es " + edad + " y juega en " + puesto + " con el numero " + numero + ".";
+
+        return super.toString() + ", su edad es " + edad + " y juega en " + puesto + " con el numero " + numero + ".";
     }
 
-    public Jugador() {}
+    public Jugador() {
+    }
 
-    public Jugador(short aId, String name, String surname, String position, short number, short age) {
-        id = aId;
-        nombre = name;
-        apellido = surname;
-        puesto = position;
-        numero = number;
-        edad = age;
+    public Jugador(short aId, String aname, String asurname, String aposition, short anumber, short aage) {
+        super(aId, aname, asurname);
+        puesto = aposition;
+        numero = anumber;
+        edad = aage;
     }
 }
