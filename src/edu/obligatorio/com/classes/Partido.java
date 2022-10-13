@@ -28,36 +28,36 @@ public class Partido {
 //    #endregion
 
 //    #region getters
-    public short Id() {
+    public short getId() {
         return id;
     }
-    public String Estadio() {
+    public String getEstadio() {
         return estadio;
     }
-    public String Fecha() {
+    public String getFecha() {
         return fecha;
     }
-    public String Hora() {
+    public String getHora() {
         return hora;
     }
-    public String Clima() {
+    public String getClima() {
         return clima;
     }
-    public Jugador[] E1Titulares() {
+    public Jugador[] getE1Titulares() {
         return e1Titulares;
     }
-    public Jugador[] E2Titulares() {
+    public Jugador[] getE2Titulares() {
         return e2Titulares;
     }
-    public Jugador[] E1Suplentes() {
+    public Jugador[] getE1Suplentes() {
         return e1Suplentes;
     }
-    public Jugador[] E2Suplentes() {
+    public Jugador[] getE2Suplentes() {
         return e2Suplentes;
     }
-    public boolean Jugando() {return jugando;}
-    public boolean Terminado() {return terminado;}
-    public int MinutosJugados() {return minutosJugados;}
+    public boolean getJugando() {return jugando;}
+    public boolean getTerminado() {return terminado;}
+    public int getMinutosJugados() {return minutosJugados;}
 //    #endregion
 
 //    #region methods
@@ -73,22 +73,22 @@ public class Partido {
 
         for (Jugador player : e1Titulares)
             if (player != null)
-                if (player.Id() == aPlayer.Id())
+                if (player.getId() == aPlayer.getId())
                     isPlaying = true;
 
         for (Jugador player : e2Titulares)
             if (player != null)
-                if (player.Id() == aPlayer.Id())
+                if (player.getId() == aPlayer.getId())
                     isPlaying = true;
 
         for (Jugador player : e1Suplentes)
             if (player != null)
-                if (player.Id() == aPlayer.Id())
+                if (player.getId() == aPlayer.getId())
                     isPlaying = true;
 
         for (Jugador player : e2Suplentes)
             if (player != null)
-                if (player.Id() == aPlayer.Id())
+                if (player.getId() == aPlayer.getId())
                     isPlaying = true;
 
         return isPlaying;
@@ -121,19 +121,19 @@ public class Partido {
     }
     public void removePlayerFromTeam(Jugador aPlayer) {
         for (int i = 0; i < e1Titulares.length; i++)
-            if (e1Titulares[i].Id() == aPlayer.Id())
+            if (e1Titulares[i].getId() == aPlayer.getId())
                 e1Titulares[i] = null;
 
         for (int i = 0; i < e2Titulares.length; i++)
-            if (e2Titulares[i].Id() == aPlayer.Id())
+            if (e2Titulares[i].getId() == aPlayer.getId())
                 e2Titulares[i] = null;
 
         for (int i = 0; i < e1Suplentes.length; i++)
-            if (e1Suplentes[i].Id() == aPlayer.Id())
+            if (e1Suplentes[i].getId() == aPlayer.getId())
                 e1Suplentes[i] = null;
 
         for (int i = 0; i < e2Suplentes.length; i++)
-            if (e2Suplentes[i].Id() == aPlayer.Id())
+            if (e2Suplentes[i].getId() == aPlayer.getId())
                 e2Suplentes[i] = null;
     }
 //    #endregion

@@ -126,22 +126,22 @@ public class Front {
         System.out.println(match.toString());
 
         System.out.println("\nEquipo 1:\n\tTitulares:");
-        for (Jugador jugador : match.E1Titulares())
+        for (Jugador jugador : match.getE1Titulares())
             if (jugador != null)
                 System.out.println("\t" + jugador);
 
         System.out.println("\n\tSuplentes:");
-        for (Jugador jugador : match.E1Suplentes())
+        for (Jugador jugador : match.getE1Suplentes())
             if (jugador != null)
                 System.out.println("\t" + jugador);
 
         System.out.println("\nEquipo 2:\n\tTitulares:");
-        for (Jugador jugador : match.E2Titulares())
+        for (Jugador jugador : match.getE2Titulares())
             if (jugador != null)
                 System.out.println("\t" + jugador);
 
         System.out.println("\n\tSuplentes:");
-        for (Jugador jugador : match.E2Suplentes())
+        for (Jugador jugador : match.getE2Suplentes())
             if (jugador != null)
                 System.out.println("\t" + jugador);
     }

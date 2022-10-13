@@ -35,28 +35,28 @@ public class Controladora {
     //    #region searchMethods
     public Jugador searchPlayerById(short aId) {
         for (int i = 0; i < listaJugadores.size(); i++)
-            if (listaJugadores.get(i).Id() == aId) return listaJugadores.get(i);
+            if (listaJugadores.get(i).getId() == aId) return listaJugadores.get(i);
 
         return null;
     }
 
     public Partido searchMatchById(short aId) {
         for (int i = 0; i < listaPartidos.size(); i++)
-            if (listaPartidos.get(i).Id() == aId) return listaPartidos.get(i);
+            if (listaPartidos.get(i).getId() == aId) return listaPartidos.get(i);
 
         return null;
     }
 
     public Arbitro searchRefereeById(short pId) {
         for (int i = 0; i < listaArbitros.size(); i++)
-            if (listaArbitros.get(i).Id() == pId) return listaArbitros.get(i);
+            if (listaArbitros.get(i).getId() == pId) return listaArbitros.get(i);
 
         return null;
     }
 
     public DT searchDTById(short pId) {
         for (int i = 0; i < listaDTs.size(); i++)
-            if (listaDTs.get(i).Id() == pId) return listaDTs.get(i);
+            if (listaDTs.get(i).getId() == pId) return listaDTs.get(i);
 
         return null;
     }
@@ -70,7 +70,7 @@ public class Controladora {
 
         short max = 0;
         for (Jugador j : listaJugadores)
-            if (j.Id() > max) max = j.Id();
+            if (j.getId() > max) max = j.getId();
 
         return (short) (max + 1);
     }
@@ -80,7 +80,7 @@ public class Controladora {
 
         short max = 0;
         for (Arbitro a : listaArbitros)
-            if (a.Id() > max) max = a.Id();
+            if (a.getId() > max) max = a.getId();
 
         return (short) (max + 1);
     }
@@ -90,7 +90,7 @@ public class Controladora {
 
         short max = 0;
         for (DT d : listaDTs)
-            if (d.Id() > max) max = d.Id();
+            if (d.getId() > max) max = d.getId();
 
         return (short) (max + 1);
     }
@@ -100,7 +100,7 @@ public class Controladora {
 
         short max = 0;
         for (Partido p : listaPartidos)
-            if (p.Id() > max) max = p.Id();
+            if (p.getId() > max) max = p.getId();
 
         return (short) (max + 1);
     }
@@ -108,7 +108,7 @@ public class Controladora {
 
     //    #region players
     public void addPlayer(Jugador aJugador) {
-        aJugador.Id(getNextPlayerId());
+        aJugador.setId(getNextPlayerId());
         listaJugadores.add(aJugador);
     }
 
@@ -121,7 +121,7 @@ public class Controladora {
 
     //    #region arbitros
     public void addArbitro(Arbitro pArbitro) {
-        pArbitro.Id(getNextRefereeId());
+        pArbitro.setId(getNextRefereeId());
         listaArbitros.add(pArbitro);
     }
 
@@ -134,7 +134,7 @@ public class Controladora {
     //    #endregion
 //    #region DT
     public void addDT(DT pDT) {
-        pDT.Id(getNextDTId());
+        pDT.setId(getNextDTId());
         listaDTs.add(pDT);
     }
 
@@ -160,14 +160,14 @@ public class Controladora {
     public void startMatch(short aId) {
         Partido partido = searchMatchById(aId);
         if (partido != null)
-            if (!partido.Jugando() && !partido.Terminado())
+            if (!partido.getJugando() && !partido.getTerminado())
                 partido.Start();
     }
 
     public void endMatch(short aId) {
         Partido partido = searchMatchById(aId);
         if (partido != null)
-            if (partido.Jugando())
+            if (partido.getJugando())
                 partido.End();
     }
 
