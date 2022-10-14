@@ -34,7 +34,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "[" + id + "] El nombre es " + nombre + " " + apellido + ".";
+        return "[" + id + "] El nombre es " + nombre + " " + apellido;
     }
 
     public Persona() {

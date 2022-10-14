@@ -8,9 +8,11 @@ public class Front {
     private static Controladora controladora = new Controladora();
     private static Scanner scanner = new Scanner(System.in);
     private static boolean running = true;
+    private static int columnWidth = 25;
 
     public static void main(String[] args) {
-        System.out.println("Bienvenido!\nObligatorio realizado por: \n\t- Leandro Chelentano\n\t- Guadalupe Dovat");
+        System.out.println("\n\nBienvenido!\nObligatorio realizado por: \n\t- Leandro Chelentano\n\t- Guadalupe Dovat");
+        System.out.println("\nTutorial: Ej. Para crear un jugador se debe introducir 11.");
 
         controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
         controladora.addMatch(new Partido((short) 0, "La Bombonera", "Hoy", "20:00", "Lloviendo"));
@@ -22,82 +24,161 @@ public class Front {
     }
 
 //    #region utils
+    public static String alignLeft(String line) {
+        if (line.length() == columnWidth) return line;
+        if (line.length() > columnWidth) return line.substring(0, columnWidth);
+
+        int spacesLeft = columnWidth - line.length();
+        for (int i = 0; i < spacesLeft; i++)
+            line += " ";
+
+        return line;
+    }
+    public static String[] alignLeft(String[] lines) {
+        String[] toReturn = new String[lines.length];
+        for (int i = 0; i < lines.length; i++) {
+            if (lines[i] == null) {
+                toReturn[i] = " ";
+                continue;
+            }
+
+            String line = lines[i];
+
+            if (line.length() == columnWidth) {
+                toReturn[i] = line;
+                continue;
+            }
+
+            if (line.length() > columnWidth) {
+                toReturn[i] = line.substring(0, columnWidth);
+                continue;
+            }
+
+            int spacesLeft = columnWidth - line.length();
+            for (int k = 0; k < spacesLeft; k++)
+                line += " ";
+
+            toReturn[i] = line;
+        }
+        return toReturn;
+    }
     public static void showMenu() {
         System.out.println("\nMenu:");
-        System.out.println(" 1- Nuevo jugador");
-        System.out.println(" 2- Eliminar jugador");
-        System.out.println(" 3- Listar jugadores");
-        System.out.println(" 4- Nuevo Arbitro");
-        System.out.println(" 5- Eliminar Arbitro");
-        System.out.println(" 6- Listar Arbitro");
-        System.out.println(" 7- Nuevo DT");
-        System.out.println(" 8- Eliminar DT");
-        System.out.println(" 9- Listar DT");
-        System.out.println(" 10- Nuevo partido");
-        System.out.println(" 11- Eliminar partido");
-        System.out.println(" 12- Listar Partidos");
-        System.out.println(" 13- Iniciar partido");
-        System.out.println(" 14- Terminar Partido");
-        System.out.println(" 15- Asignar jugador a partido");
-        System.out.println(" 16- Remover jugador de partido");
-        System.out.println(" 17- Mostrar asignaciones de partido");
+
+        String[] header = {"1. Jugadores", "2. Arbitros", "3. Directores Técnicos", "4. Partidos"};
+
+        String f = "";
+        for (String s : header)
+            f += "%" + columnWidth + "s";
+
+        System.out.format(f + "\n", alignLeft(header));
+
+        String[][] menuData = {
+                {
+                    //  Jugadores
+                        " 1. Nuevo",
+                        " 2. Eliminar",
+                        " 3. Listar",
+                },
+                {
+                    //  Arbitros
+                        " 1. Nuevo",
+                        " 2. Eliminar",
+                        " 3. Listar",
+                },
+                {
+                    //  Directores Tecnicos
+                        " 1. Nuevo",
+                        " 2. Eliminar",
+                        " 3. Listar",
+                },
+                {
+                    //  Partidos
+                        " 1. Nuevo",
+                        " 2. Eliminar",
+                        " 3. Listar",
+                        " 4. Asignar",
+                        " 5. Des-asignar",
+                        " 6. Mostrar asignaciones",
+                        " 7. Iniciar",
+                        " 8. Finalizar",
+                },
+        };
+
+        int rows = 0;
+        for (String[] col : menuData)
+            if (col.length > rows) rows = col.length;
+
+        for (int k = 0; k < rows; k++) {
+            String[] data = new String[menuData.length];
+            String format = "";
+            for (int i = 0; i < menuData.length; i++) {
+                try {
+                    data[i] = menuData[i][k];
+                } catch (Exception e) {
+                    data[i] = null;
+                }
+                format += "%" + columnWidth + "s";
+            }
+            System.out.printf(format + "\n", alignLeft(data));
+        }
 
         System.out.println("\n0- Salir (Perdida de datos)");
 
         switch (getInput()) {
-            case "1":
+            case "11":
                 newPlayer();
                 break;
-            case "2":
+            case "12":
                 deletePlayer();
                 break;
-            case "3":
+            case "13":
                 listPeople(new Jugador());
                 break;
-            case "4":
+            case "21":
                 newArbitro();
                 break;
-            case "5":
+            case "22":
                 deleteArbitro();
                 break;
-            case "6":
+            case "23":
                 listPeople(new Arbitro());
                 break;
-            case "7":
+            case "31":
                 newDT();
                 break;
-            case "8":
+            case "32":
                 deleteDT();
                 break;
-            case "9":
+            case "33":
                 listPeople(new DT());
                 break;
-            case "10":
+            case "41":
                 newMatch();
                 break;
-            case "11":
+            case "42":
                 deleteMatch();
                 break;
-            case "12":
+            case "43":
                 listMatches();
                 break;
-            case "13":
-                startMatch();
-                break;
-            case "14":
-                endMatch();
-                break;
-            case "15":
+            case "44":
                 assignPlayer();
                 break;
-            case "16":
+            case "45":
                 unassignPlayer();
                 break;
-            case "17":
+            case "46":
                 listMatches();
                 System.out.println("Escoja un partido:");
                 Partido match = controladora.searchMatchById(Short.parseShort(getInput()));
                 showMatch(match);
+                break;
+            case "47":
+                startMatch();
+                break;
+            case "48":
+                endMatch();
                 break;
             case "0":
                 running = false;

@@ -38,7 +38,7 @@ public class Jugador extends Persona {
     @Override
     public String toString() {
 
-        return super.toString() + ", su edad es " + edad + " y juega en " + puesto + " con el numero " + numero + ".";
+        return super.toString() + ", su edad es " + edad + " y juega de " + puesto + " con el numero " + numero + ".";
     }
 
     public Jugador() {
