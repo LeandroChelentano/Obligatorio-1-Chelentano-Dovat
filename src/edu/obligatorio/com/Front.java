@@ -1,9 +1,6 @@
 package edu.obligatorio.com;
 
-import edu.obligatorio.com.classes.Arbitro;
-import edu.obligatorio.com.classes.DT;
-import edu.obligatorio.com.classes.Jugador;
-import edu.obligatorio.com.classes.Partido;
+import edu.obligatorio.com.classes.*;
 
 import java.util.Scanner;
 
@@ -55,7 +52,7 @@ public class Front {
                 deletePlayer();
                 break;
             case "3":
-                list(controladora.getJugadores().toArray());
+                listPeople(new Jugador());
                 break;
             case "4":
                 newArbitro();
@@ -64,7 +61,7 @@ public class Front {
                 deleteArbitro();
                 break;
             case "6":
-                list(controladora.getArbitro().toArray());
+                listPeople(new Arbitro());
                 break;
             case "7":
                 newDT();
@@ -73,7 +70,7 @@ public class Front {
                 deleteDT();
                 break;
             case "9":
-                list(controladora.getDT().toArray());
+                listPeople(new DT());
                 break;
             case "10":
                 newMatch();
@@ -82,7 +79,7 @@ public class Front {
                 deleteMatch();
                 break;
             case "12":
-                list(controladora.getPartidos().toArray());
+                listMatches();
                 break;
             case "13":
                 startMatch();
@@ -97,7 +94,7 @@ public class Front {
                 unassignPlayer();
                 break;
             case "17":
-                list(controladora.getPartidos().toArray());
+                listMatches();
                 System.out.println("Escoja un partido:");
                 Partido match = controladora.searchMatchById(Short.parseShort(getInput()));
                 showMatch(match);
@@ -114,12 +111,24 @@ public class Front {
         System.out.print("\n\t> ");
         return scanner.next();
     }
-    public static void list(Object[] list) {
-        System.out.println("\nListado:");
-        for (Object obj : list)
-            System.out.println(obj.toString());
 
-        if (list.length == 0)
+    // .toArray() returns Object[]
+    //
+    public static void listPeople(Object neededClass) {
+        System.out.println("\nListado:");
+        for (Persona person : controladora.getPersonas())
+            if (person.getClass().getName().equals(neededClass.getClass().getName()))
+                System.out.println(person);
+
+        if (controladora.getPersonas().size() == 0)
+            System.out.println("No hay elementos..");
+    }
+    public static void listMatches() {
+        System.out.println("\nListado:");
+        for (Partido match : controladora.getPartidos())
+            System.out.println(match);
+
+        if (controladora.getPartidos().size() == 0)
             System.out.println("No hay elementos..");
     }
     public static void showMatch(Partido match) {
@@ -166,7 +175,7 @@ public class Front {
         controladora.addPlayer(player);
     }
     public static void deletePlayer() {
-        list(controladora.getJugadores().toArray());
+        listPeople(new Jugador());
         System.out.println("\nSeleccione el identificador del jugador a eliminar:");
         String id = getInput();
 
@@ -184,13 +193,12 @@ public class Front {
         System.out.print("\nPuesto:\n> ");
         String position = scanner.nextLine();
 
-
         Arbitro pArbitro = new Arbitro((short) 0, name, surname, position);
 
         controladora.addArbitro(pArbitro);
     }
     public static void deleteArbitro() {
-        list(controladora.getArbitro().toArray());
+        listPeople(new Arbitro());
         System.out.println("\nSeleccione el identificador del Arbitro a eliminar:");
         String id = getInput();
 
@@ -215,7 +223,7 @@ public class Front {
         controladora.addDT(pDT);
     }
     public static void deleteDT() {
-        list(controladora.getDT().toArray());
+        listPeople(new DT());
         System.out.println("\nSeleccione el identificador del DT a eliminar:");
         String id = getInput();
 
@@ -240,36 +248,36 @@ public class Front {
         controladora.addMatch(partido);
     }
     public static void deleteMatch() {
-        list(controladora.getPartidos().toArray());
+        listMatches();
         System.out.println("\nSeleccione el identificador del partido a eliminar:");
         String id = getInput();
 
         controladora.deleteMatch(Short.parseShort(id));
     }
     public static void startMatch() {
-        list(controladora.getPartidos().toArray());
+        listMatches();
         System.out.println("\nSeleccione el identificador del partido a iniciar:");
         String id = getInput();
 
         controladora.startMatch(Short.parseShort(id));
     }
     public static void endMatch() {
-        list(controladora.getPartidos().toArray());
+        listMatches();
         System.out.println("\nSeleccione el identificador del partido a terminar:");
         String id = getInput();
 
         controladora.endMatch(Short.parseShort(id));
     }
-    public static void assignPlayer() {
-        list(controladora.getPartidos().toArray());
+    public static boolean assignPlayer() {
+        listMatches();
         System.out.println("Seleccione un partido:");
         String matchId = getInput();
         Partido match = controladora.searchMatchById(Short.parseShort(matchId));
 
-        list(controladora.getJugadores().toArray());
+        listPeople(new Jugador());
         System.out.println("Seleccione un jugador:");
         String playerId = getInput();
-        Jugador player = controladora.searchPlayerById(Short.parseShort(playerId));
+        Persona player = controladora.searchPeople(Short.parseShort(playerId));
 
         System.out.println("Para que equipo?\t[1 o 2]");
         String team = getInput();
@@ -278,20 +286,26 @@ public class Front {
         String isTitularStr = getInput();
         boolean isTitular = isTitularStr.equalsIgnoreCase("S");
 
-        controladora.assignPlayer(match, player, team, isTitular);
+        if (match == null || !(player instanceof Jugador)) return false;
+
+        controladora.assignPlayer(match, (Jugador) player, team, isTitular);
+        return true;
     }
-    public static void unassignPlayer() {
-        list(controladora.getPartidos().toArray());
+    public static boolean unassignPlayer() {
+        listMatches();
         System.out.println("Seleccione un partido:");
         String matchId = getInput();
         Partido match = controladora.searchMatchById(Short.parseShort(matchId));
 
-        list(controladora.getJugadores().toArray());
+        listPeople(new Jugador());
         System.out.println("Seleccione un jugador:");
         String playerId = getInput();
-        Jugador player = controladora.searchPlayerById(Short.parseShort(playerId));
+        Persona player = controladora.searchPeople(Short.parseShort(playerId));
 
-        controladora.unassignPlayer(match, player);
+        if (match == null || !(player instanceof Jugador)) return false;
+
+        controladora.unassignPlayer(match, (Jugador) player);
+        return true;
     }
 //    #endregion
 }
