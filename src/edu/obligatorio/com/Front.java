@@ -98,7 +98,7 @@ public class Front {
                         " 2. Eliminar",
                         " 3. Listar",
                         " 4. Asignar",
-                        " 5. Des-asignar",
+                        " 5. Remover jugador",
                         " 6. Mostrar asignaciones",
                         " 7. Iniciar",
                         " 8. Finalizar",
@@ -120,7 +120,7 @@ public class Front {
                 }
                 format += "%" + columnWidth + "s";
             }
-            System.out.printf(format + "\n", alignLeft(data));
+            System.out.format(format + "\n", alignLeft(data));
         }
 
         System.out.println("\n0- Salir (Perdida de datos)");
@@ -163,7 +163,7 @@ public class Front {
                 listMatches();
                 break;
             case "44":
-                assignPlayer();
+                assignMenu();
                 break;
             case "45":
                 unassignPlayer();
@@ -188,6 +188,25 @@ public class Front {
                 break;
         }
     }
+
+    public static void assignMenu() {
+        System.out.println("Que deseas asignar?\n1. Jugador\n2. Director Tecnico\n3. Arbitro");
+
+        String option = getInput();
+
+        switch (option) {
+            case "1":
+                assignPlayer();
+                break;
+            case "2":
+                assignDT();
+                break;
+            case "3":
+                assignReferee();
+                break;
+        }
+    }
+
     public static String getInput() {
         System.out.print("\n\t> ");
         return scanner.next();
@@ -370,6 +389,41 @@ public class Front {
         if (match == null || !(player instanceof Jugador)) return false;
 
         controladora.assignPlayer(match, (Jugador) player, team, isTitular);
+        return true;
+    }
+    public static boolean assignDT() {
+        listMatches();
+        System.out.println("Seleccione un partido:");
+        String matchId = getInput();
+        Partido match = controladora.searchMatchById(Short.parseShort(matchId));
+
+        listPeople(new DT());
+        System.out.println("Seleccione un director tecnico:");
+        String playerId = getInput();
+        Persona dt = controladora.searchPeople(Short.parseShort(playerId));
+
+        System.out.println("Para que equipo?\t[1 o 2]");
+        String team = getInput();
+
+        if (match == null || !(dt instanceof DT)) return false;
+
+        controladora.assignDT(match, (DT) dt, team);
+        return true;
+    }
+    public static boolean assignReferee() {
+        listMatches();
+        System.out.println("Seleccione un partido:");
+        String matchId = getInput();
+        Partido match = controladora.searchMatchById(Short.parseShort(matchId));
+
+        listPeople(new Arbitro());
+        System.out.println("Seleccione un arbitro:");
+        String refereeId = getInput();
+        Persona referee = controladora.searchPeople(Short.parseShort(refereeId));
+
+        if (match == null || !(referee instanceof Arbitro)) return false;
+
+        controladora.assignReferee(match, (Arbitro) referee);
         return true;
     }
     public static boolean unassignPlayer() {

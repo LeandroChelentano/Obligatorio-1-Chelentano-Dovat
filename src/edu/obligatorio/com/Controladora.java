@@ -121,6 +121,23 @@ public class Controladora {
                 partido.End();
     }
 
+    public void assignDT(Partido aMatch, DT aDt, String aTeam) {
+        if (aMatch.getE1DT().getId() == aDt.getId() || aMatch.getE2DT().getId() == aDt.getId()) return;
+
+        switch (aTeam) {
+            case "1":
+                aMatch.setE1Dt(aDt);
+                break;
+            case "2":
+                aMatch.setE2Dt(aDt);
+                break;
+        }
+    }
+
+    public void assignReferee(Partido aMatch, Arbitro aReferee) {
+        aMatch.assignReferee(aReferee);
+    }
+
     public void assignPlayer(Partido match, Jugador player, String team, boolean isTitular) {
         if (match.isPlayerPlaying(player))
             return;

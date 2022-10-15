@@ -24,7 +24,15 @@ public class Partido {
     private Arbitro[] arbitros = new Arbitro[3];
 
 //    #region setters
-    public void Id(short aId) {id = aId;}
+    public void Id(short aId) {
+        id = aId;
+    }
+    public void setE1Dt(DT aDt) {
+        e1Dt = aDt;
+    }
+    public void setE2Dt(DT aDt) {
+        e2Dt = aDt;
+    }
 //    #endregion
 
 //    #region getters
@@ -36,6 +44,12 @@ public class Partido {
     }
     public short getE2Score() {
         return e2Score;
+    }
+    public DT getE1DT() {
+        return e1Dt;
+    }
+    public DT getE2DT() {
+        return e2Dt;
     }
     public String getEstadio() {
         return estadio;
@@ -76,14 +90,14 @@ public class Partido {
     }
     public boolean Start() {
         if (
-                terminado &&
-                countPeople(e1Titulares) == 11 &&
-                countPeople(e2Titulares) == 11 &&
-                countPeople(e1Suplentes) == 5 &&
-                countPeople(e2Suplentes) == 5 &&
-                countPeople(arbitros) == 3 &&
-                e1Dt != null &&
-                e2Dt != null
+                terminado ||
+                countPeople(e1Titulares) != 11 ||
+                countPeople(e2Titulares) != 11 ||
+                countPeople(e1Suplentes) != 5 ||
+                countPeople(e2Suplentes) != 5 ||
+                countPeople(arbitros) != 3 ||
+                e1Dt == null ||
+                e2Dt == null
         ) {
             return false;
         }
@@ -167,12 +181,64 @@ public class Partido {
                 e2Suplentes[i] = null;
     }
     public void changePlayer(Jugador aEnters, Jugador aExits) {
+        int outTeam = -1;
+        int inTeam = -1;
 
+        // validar que el que sale es titular
+        for (Jugador j : e1Titulares)
+            if (j.getId() == aExits.getId())
+                outTeam = 1;
+
+        for (Jugador j : e2Titulares)
+            if (j.getId() == aExits.getId())
+                outTeam = 2;
+
+
+        // validar que el jugador que entra es suplente
+        for (Jugador j : e1Suplentes)
+            if (j.getId() == aEnters.getId())
+                inTeam = 1;
+
+        for (Jugador j : e1Suplentes)
+            if (j.getId() == aEnters.getId())
+                inTeam = 2;
+
+        // validar que sean del mismo equipo
+        if (outTeam != inTeam || outTeam == -1) return;
+
+        // sacamos de los titulares quien sale y lo guardamos en una variable auxiliar
+        Jugador temp = null;
+        for (Jugador j : (inTeam == 1 ? e1Titulares : e2Titulares))
+            if (j.getId() == aExits.getId()) {
+                temp = j;
+                j = aEnters;
+            }
+
+        // reemplazar el que entra por el que sale
+        for (Jugador j : (inTeam == 1 ? e1Suplentes : e2Suplentes))
+            if (j.getId() == aExits.getId())
+                j = temp;
     }
     public void scoreGoal(Jugador aPlayer) {
+        if (!jugando) return;
 
+        for (Jugador j : e1Titulares)
+            if (j.getId() == aPlayer.getId())
+                e1Score++;
+
+        for (Jugador j : e2Titulares)
+            if (j.getId() == aPlayer.getId())
+                e2Score++;
     }
+    public void assignReferee(Arbitro aReferee) {
+         for (Arbitro a : arbitros)
+             if (a.getId() == aReferee.getId())
+                 return;
 
+        for (Arbitro a : arbitros)
+            if (a == null)
+                a = aReferee;
+    }
 //    #endregion
 
     @Override
