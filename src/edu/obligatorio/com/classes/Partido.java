@@ -89,18 +89,18 @@ public class Partido {
         return count;
     }
     public boolean Start() {
-//        if (
-//                terminado ||
-//                countPeople(e1Titulares) != 11 ||
-//                countPeople(e2Titulares) != 11 ||
-//                countPeople(e1Suplentes) != 5 ||
-//                countPeople(e2Suplentes) != 5 ||
-//                countPeople(arbitros) != 3 ||
-//                e1Dt == null ||
-//                e2Dt == null
-//        ) {
-//            return false;
-//        }
+        if (
+                terminado ||
+                countPeople(e1Titulares) != 11 ||
+                countPeople(e2Titulares) != 11 ||
+                countPeople(e1Suplentes) != 5 ||
+                countPeople(e2Suplentes) != 5 ||
+                countPeople(arbitros) != 3 ||
+                e1Dt == null ||
+                e2Dt == null
+        ) {
+            return false;
+        }
 
         jugando = true;
         return true;

@@ -14,7 +14,29 @@ public class Front {
         System.out.println("\n\nBienvenido!\nObligatorio realizado por: \n\t- Leandro Chelentano\n\t- Guadalupe Dovat");
         System.out.println("\nTutorial: Ej. Para crear un jugador se debe introducir 11.");
 
+        controladora.addPlayer(new Jugador((short) 0, "Fernando", "Muslera", "portero", (short) 1, (short) 19));
         controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+
+        controladora.addDT(new DT((short) 0, "Oscar", "Tabarez", (short) 75));
+
+
+
         controladora.addMatch(new Partido((short) 0, "La Bombonera", "Hoy", "20:00", "Lloviendo"));
 
         while (running)
