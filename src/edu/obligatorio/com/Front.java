@@ -15,26 +15,46 @@ public class Front {
         System.out.println("\nTutorial: Ej. Para crear un jugador se debe introducir 11.");
 
         controladora.addPlayer(new Jugador((short) 0, "Fernando", "Muslera", "portero", (short) 1, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
-        controladora.addPlayer(new Jugador((short) 0, "Leandro", "Chelentano", "delantero", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 1, "Sebastián", "Sosa", "portero", (short) 23, (short) 36));
+        controladora.addPlayer(new Jugador((short) 2, "Ronal", "Araujo", "defensa central", (short) 4, (short) 23));
+        controladora.addPlayer(new Jugador((short) 4, "Agustin", "Ragel", "defensa central", (short) 2, (short) 24));
+        controladora.addPlayer(new Jugador((short) 5, "Sebastián", "Cáceres", "defensa central", (short) 3, (short) 23));
+        controladora.addPlayer(new Jugador((short) 6, "Leandro", "Cabrera", "defensa central", (short) 26, (short) 31));
+        controladora.addPlayer(new Jugador((short) 7, "Martin", "Cáceres", "defensa central", (short) 22, (short) 35));
+        controladora.addPlayer(new Jugador((short) 8, "Mathías", "Olivera", "Lateral izquierdo", (short) 17, (short) 24));
+        controladora.addPlayer(new Jugador((short) 9, "Guillermo", "Varela", "Lateral derecho", (short) 10, (short) 19));
+        controladora.addPlayer(new Jugador((short) 10, "Leandro", "Chelentano", "delantero", (short) 13, (short) 34));
+        controladora.addPlayer(new Jugador((short) 11, "Lucas", "Torreira", "Pivote", (short) 14, (short) 26));
+        controladora.addPlayer(new Jugador((short) 12, "Manuel", "Ugarte", "Pivote", (short) 25, (short) 21));
+        controladora.addPlayer(new Jugador((short) 13, "Federico", "Valverde", "Mediocentro", (short) 7, (short) 25));
+        controladora.addPlayer(new Jugador((short) 14, "Rodrigo", "Bentacour", "Mediocentro", (short) 6, (short) 25));
+        controladora.addPlayer(new Jugador((short) 15, "Matías", "Vecino", "Mediocentro", (short) 5, (short) 31));
+        controladora.addPlayer(new Jugador((short) 16, "Giorgian", "de Arrscaeta", "Mediocentro ofensivo", (short) 10, (short) 28));
+        controladora.addPlayer(new Jugador((short) 17, "Diego", "Rossi", "Extremo izquierdo", (short) 20, (short) 24));
+        controladora.addPlayer(new Jugador((short) 18, "Agustin", "Canaobio", "Extremo derecho", (short) 18, (short) 24));
+        controladora.addPlayer(new Jugador((short) 19, "Brian", "Ocampo", "Delantero centro", (short) 11, (short) 23));
+        controladora.addPlayer(new Jugador((short) 20, "Luis", "Suarez", "Delantero centro", (short) 9, (short) 35));
+        controladora.addPlayer(new Jugador((short) 21, "Martín", "Satriano",    "Delantero centro", (short) 19, (short) 21));
+        controladora.addPlayer(new Jugador((short) 22, "Roberto", "Sanchez", "portero", (short) 1, (short) 24));
+        controladora.addPlayer(new Jugador((short) 23, "David", "Gea", "portero", (short) 35, (short) 31));
+        controladora.addPlayer(new Jugador((short) 24, "Iñaki", "Peña", "Mediocentro", (short) 23, (short) 23));
+        controladora.addPlayer(new Jugador((short) 25, "Unai", "Simon", "Delantero centro", (short) 20, (short) 25));
+        controladora.addPlayer(new Jugador((short) 26, "Oscar", "Mingueza", "Extremo izquierdo", (short) 21, (short) 23));
+        controladora.addPlayer(new Jugador((short) 27, "Cesar", "Azpilicueta", "Pivote", (short) 33, (short) 33));
+        controladora.addPlayer(new Jugador((short) 28, "Diego", "Llorente", "Pivote", (short) 17, (short) 29));
+        controladora.addPlayer(new Jugador((short) 29, "Aymeric", "Laporte", "Mediocentro", (short) 15, (short) 28));
+        controladora.addPlayer(new Jugador((short) 30, "Hugo", "Guillamón", "Extremo izquierdo", (short) 12, (short) 22));
+        controladora.addPlayer(new Jugador((short) 31, "Oscar", "Gil", "Extremo derecho", (short) 18, (short) 24));
+        controladora.addPlayer(new Jugador((short) 32, "Jordi", "Alba", "delantero", (short) 18, (short) 33));
 
-        controladora.addDT(new DT((short) 0, "Oscar", "Tabarez", (short) 75));
 
+
+        controladora.addArbitro(new Arbitro((short) 33, "Diego", "Alba", "Arbitro Central"));
+        controladora.addArbitro(new Arbitro((short) 34, "Héctor", "Baldassi", "Arbitro Lareal Derecho"));
+        controladora.addArbitro(new Arbitro((short) 35, "Leandro", "Chelentano", "Arbitro Lareal Isquierdo"));
+
+        controladora.addDT(new DT((short) 36, "Oscar", "Tabarez", (short) 75));
+        controladora.addDT(new DT((short) 37, "Luis", "Martínez", (short) 51));
 
 
         controladora.addMatch(new Partido((short) 0, "La Bombonera", "Hoy", "20:00", "Lloviendo"));
