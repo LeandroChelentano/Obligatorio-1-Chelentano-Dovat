@@ -89,24 +89,24 @@ public class Partido {
         return count;
     }
     public boolean Start() {
-        if (
-                terminado ||
-                countPeople(e1Titulares) != 11 ||
-                countPeople(e2Titulares) != 11 ||
-                countPeople(e1Suplentes) != 5 ||
-                countPeople(e2Suplentes) != 5 ||
-                countPeople(arbitros) != 3 ||
-                e1Dt == null ||
-                e2Dt == null
-        ) {
-            return false;
-        }
+//        if (
+//                terminado ||
+//                countPeople(e1Titulares) != 11 ||
+//                countPeople(e2Titulares) != 11 ||
+//                countPeople(e1Suplentes) != 5 ||
+//                countPeople(e2Suplentes) != 5 ||
+//                countPeople(arbitros) != 3 ||
+//                e1Dt == null ||
+//                e2Dt == null
+//        ) {
+//            return false;
+//        }
 
         jugando = true;
         return true;
     }
     public boolean End() {
-        if (!terminado && jugando) return false;
+        if (!jugando) return false;
 
         jugando = false;
         terminado = true;
@@ -220,15 +220,19 @@ public class Partido {
                 j = temp;
     }
     public void scoreGoal(Jugador aPlayer) {
-        if (!jugando) return;
+        if (!jugando || aPlayer == null) return;
 
         for (Jugador j : e1Titulares)
-            if (j.getId() == aPlayer.getId())
+            if (j.getId() == aPlayer.getId()) {
                 e1Score++;
+                return;
+            }
 
         for (Jugador j : e2Titulares)
-            if (j.getId() == aPlayer.getId())
+            if (j.getId() == aPlayer.getId()) {
                 e2Score++;
+                return;
+            }
     }
     public void assignReferee(Arbitro aReferee) {
          for (Arbitro a : arbitros)
@@ -243,7 +247,8 @@ public class Partido {
 
     @Override
     public String toString() {
-        return "[" + id + "] Estadio \"" + estadio + "\", " + fecha + " " + hora + " - Clima: " + clima + (jugando ? " [JUGANDO]" : "") + (terminado ? " [TERMINADO]" : "");}
+        return "[" + id + "] Estadio \"" + estadio + "\", " + fecha + " " + hora + " - Clima: " + clima + " " + e1Score + " - " + e2Score + (terminado ? " [TERMINADO]" : "");
+    }
 
     public Partido() {}
     public Partido(short Id, String Estadio, String Fecha, String Hora, String Clima) {

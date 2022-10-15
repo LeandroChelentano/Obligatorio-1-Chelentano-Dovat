@@ -102,6 +102,7 @@ public class Front {
                         " 6. Mostrar asignaciones",
                         " 7. Iniciar",
                         " 8. Finalizar",
+                        " 9. Meter gol",
                 },
         };
 
@@ -179,6 +180,9 @@ public class Front {
                 break;
             case "48":
                 endMatch();
+                break;
+            case "49":
+                score();
                 break;
             case "0":
                 running = false;
@@ -389,6 +393,22 @@ public class Front {
         if (match == null || !(player instanceof Jugador)) return false;
 
         controladora.assignPlayer(match, (Jugador) player, team, isTitular);
+        return true;
+    }
+    public static boolean score() {
+        listMatches();
+        System.out.println("Seleccione un partido:");
+        String matchId = getInput();
+        Partido match = controladora.searchMatchById(Short.parseShort(matchId));
+
+        showMatch(match);
+        System.out.println("Seleccione un jugador:");
+        String playerId = getInput();
+        Persona player = controladora.searchPeople(Short.parseShort(playerId));
+
+        if (match == null || !(player instanceof Jugador)) return false;
+
+        match.scoreGoal((Jugador) player);
         return true;
     }
     public static boolean assignDT() {
