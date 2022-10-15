@@ -164,12 +164,16 @@ public class Partido {
     public void addPlayerToTeamTwo(Jugador aPlayer, boolean isTitular) {
         if (isTitular) {
             for (int i = 0; i < e2Titulares.length; i++)
-                if (e2Titulares[i] == null)
+                if (e2Titulares[i] == null) {
                     e2Titulares[i] = aPlayer;
+                    break;
+                }
         } else {
             for (int i = 0; i < e2Suplentes.length; i++)
-                if (e2Suplentes[i] == null)
+                if (e2Suplentes[i] == null) {
                     e2Suplentes[i] = aPlayer;
+                    break;
+                }
         }
     }
     public void removePlayerFromTeam(Jugador aPlayer) {
@@ -190,43 +194,57 @@ public class Partido {
                 e2Suplentes[i] = null;
     }
     public void changePlayer(Jugador aEnters, Jugador aExits) {
+        // -1 means no team
         int outTeam = -1;
         int inTeam = -1;
 
         // validar que el que sale es titular
         for (Jugador j : e1Titulares)
-            if (j.getId() == aExits.getId())
+            if (j.getId() == aExits.getId()) {
                 outTeam = 1;
+                break;
+            }
 
         for (Jugador j : e2Titulares)
-            if (j.getId() == aExits.getId())
+            if (j.getId() == aExits.getId()) {
                 outTeam = 2;
-
+                break;
+            }
 
         // validar que el jugador que entra es suplente
         for (Jugador j : e1Suplentes)
-            if (j.getId() == aEnters.getId())
+            if (j.getId() == aEnters.getId()) {
                 inTeam = 1;
+                break;
+            }
 
-        for (Jugador j : e1Suplentes)
-            if (j.getId() == aEnters.getId())
+        for (Jugador j : e2Suplentes)
+            if (j.getId() == aEnters.getId()) {
                 inTeam = 2;
+                break;
+            }
 
         // validar que sean del mismo equipo
         if (outTeam != inTeam || outTeam == -1) return;
 
+
         // sacamos de los titulares quien sale y lo guardamos en una variable auxiliar
         Jugador temp = null;
-        for (Jugador j : (inTeam == 1 ? e1Titulares : e2Titulares))
-            if (j.getId() == aExits.getId()) {
-                temp = j;
-                j = aEnters;
+        for (int i = 0; i < 11; i++) {
+            Jugador[] team = (inTeam == 1 ? e1Titulares : e2Titulares);
+            if (team[i].getId() == aExits.getId()) {
+                temp = team[i];
+                team[i] = aEnters;
             }
+        }
 
         // reemplazar el que entra por el que sale
-        for (Jugador j : (inTeam == 1 ? e1Suplentes : e2Suplentes))
-            if (j.getId() == aExits.getId())
-                j = temp;
+        for (int i = 0; i < 5; i++) {
+            Jugador[] team = (inTeam == 1 ? e1Suplentes : e2Suplentes);
+            if (team[i].getId() == aEnters.getId()) {
+                team[i] = temp;
+            }
+        }
     }
     public void scoreGoal(Jugador aPlayer) {
         // if the match is finished or the player is not appropriate, we stop
@@ -247,19 +265,27 @@ public class Partido {
             }
     }
     public void assignReferee(Arbitro aReferee) {
-         for (Arbitro a : arbitros)
-             if (a.getId() == aReferee.getId())
-                 return;
+        boolean exists = false;
 
         for (Arbitro a : arbitros)
-            if (a == null)
-                a = aReferee;
+             if (a != null)
+                 if (a.getId() == aReferee.getId())
+                     exists = true;
+
+        if (!exists)
+            for (int i = 0; i < arbitros.length; i++)
+                if (arbitros[i] == null) {
+                    arbitros[i] = aReferee;
+                    break;
+                }
     }
 //    #endregion
 
     @Override
     public String toString() {
-        return "[" + id + "] Estadio \"" + estadio + "\", " + fecha + " " + hora + " - Clima: " + clima + " " + e1Score + " - " + e2Score + (terminado ? " [TERMINADO]" : "");
+        String tmpScore = (jugando || terminado) ? e1Score + " - " + e2Score : "";
+        String tmpFinished = terminado ? " [TERMINADO]" : "";
+        return "[" + id + "] Estadio \"" + estadio + "\", " + fecha + " " + hora + " - Clima: " + clima + " " + tmpScore + " " + tmpFinished;
     }
 
     public Partido() {}

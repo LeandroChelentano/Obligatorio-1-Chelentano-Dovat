@@ -17,6 +17,7 @@ public class Front {
         controladora.addPlayer(new Jugador((short) 0, "Fernando", "Muslera", "portero", (short) 1, (short) 19));
         controladora.addPlayer(new Jugador((short) 1, "Sebastián", "Sosa", "portero", (short) 23, (short) 36));
         controladora.addPlayer(new Jugador((short) 2, "Ronal", "Araujo", "defensa central", (short) 4, (short) 23));
+        controladora.addPlayer(new Jugador((short) 3, "Jordi", "Alba", "delantero", (short) 18, (short) 33));
         controladora.addPlayer(new Jugador((short) 4, "Agustin", "Ragel", "defensa central", (short) 2, (short) 24));
         controladora.addPlayer(new Jugador((short) 5, "Sebastián", "Cáceres", "defensa central", (short) 3, (short) 23));
         controladora.addPlayer(new Jugador((short) 6, "Leandro", "Cabrera", "defensa central", (short) 26, (short) 31));
@@ -85,17 +86,17 @@ public class Front {
         match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 30), false);
         match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 31), false);
 
-        controladora.addArbitro(new Arbitro((short) 33, "Diego", "Alba", "Arbitro Central"));
-        controladora.addArbitro(new Arbitro((short) 34, "Héctor", "Baldassi", "Arbitro Lareal Derecho"));
-        controladora.addArbitro(new Arbitro((short) 35, "Leandro", "Chelentano", "Arbitro Lareal Isquierdo"));
+        controladora.addArbitro(new Arbitro((short) 32, "Diego", "Alba", "Arbitro Central"));
+        controladora.addArbitro(new Arbitro((short) 33, "Héctor", "Baldassi", "Arbitro Lareal Derecho"));
+        controladora.addArbitro(new Arbitro((short) 34, "Leandro", "Chelentano", "Arbitro Lareal Izquierdo"));
+        match.assignReferee((Arbitro) controladora.searchPeople((short) 32));
         match.assignReferee((Arbitro) controladora.searchPeople((short) 33));
         match.assignReferee((Arbitro) controladora.searchPeople((short) 34));
-        match.assignReferee((Arbitro) controladora.searchPeople((short) 35));
 
-        controladora.addDT(new DT((short) 36, "Oscar", "Tabarez", (short) 75));
-        controladora.addDT(new DT((short) 37, "Luis", "Martínez", (short) 51));
-        match.setE1Dt((DT) controladora.searchPeople((short) 36));
-        match.setE2Dt((DT) controladora.searchPeople((short) 37));
+        controladora.addDT(new DT((short) 35, "Oscar", "Tabarez", (short) 75));
+        controladora.addDT(new DT((short) 36, "Luis", "Martínez", (short) 51));
+        match.setE1Dt((DT) controladora.searchPeople((short) 35));
+        match.setE2Dt((DT) controladora.searchPeople((short) 36));
 
         while (running)
             showMenu();
@@ -197,7 +198,7 @@ public class Front {
 
         System.out.println("\n0- Salir (Perdida de datos)");
 
-        try {
+//        try {
             switch (getInput()) {
                 case "11":
                     newPlayer();
@@ -266,9 +267,9 @@ public class Front {
                     System.out.println("Opción incorrecta!");
                     break;
             }
-        } catch (Exception e) {
-            System.out.println("\nHa ocurrido un error. Volvamos al menu..\n");
-        }
+//        } catch (Exception e) {
+//            System.out.println("\nHa ocurrido un error. Volvamos al menu..\n");
+//        }
     }
 
     public static void assignMenu() {
@@ -291,6 +292,14 @@ public class Front {
     public static String getInput() {
         System.out.print("\n\t> ");
         return scanner.next();
+    }
+
+    public static void list(Object[] list) {
+        System.out.println("");
+        for (Object obj : list)
+            System.out.println(obj.toString());
+        if (list.length == 0)
+            System.out.println("No hay elementos..");
     }
 
     // listPeople is a method that prints in the console objects that extends Persona class
@@ -331,7 +340,7 @@ public class Front {
                 System.out.println("\t" + jugador);
 
         DT e1DT = match.getE1DT();
-        if (e1DT != null) System.out.println("\nArbitro equipo 1: " + e1DT);
+        if (e1DT != null) System.out.println("\n\tDirector tecnico equipo 1: " + e1DT);
 
         System.out.println("\nEquipo 2:\n\tTitulares:");
         for (Jugador jugador : match.getE2Titulares())
@@ -344,7 +353,7 @@ public class Front {
                 System.out.println("\t" + jugador);
 
         DT e2DT = match.getE2DT();
-        if (e2DT != null) System.out.println("\nArbitro equipo 1: " + e2DT);
+        if (e2DT != null) System.out.println("\n\tDirector tecnico equipo 2: " + e2DT);
 
         System.out.println("\nArbitros:");
         for (Arbitro referee : match.getReferees())
@@ -524,7 +533,9 @@ public class Front {
         String matchId = getInput();
         Partido match = controladora.searchMatchById(Short.parseShort(matchId));
 
-        showMatch(match);
+//        showMatch(match);
+        list(match.getE1Titulares());
+        list(match.getE2Titulares());
         System.out.println("Seleccione un jugador:");
         String playerId = getInput();
         Persona player = controladora.searchPeople(Short.parseShort(playerId));
@@ -600,13 +611,15 @@ public class Front {
         String matchId = getInput();
         Partido match = controladora.searchMatchById(Short.parseShort(matchId));
 
-        listPeople(new Jugador());
-        System.out.println("Seleccione el jugador a cambiar:");
+        list(match.getE1Titulares());
+        list(match.getE2Titulares());
+        System.out.println("\nSeleccione el jugador a cambiar:");
         String player1 = getInput();
         Persona playerOUT = controladora.searchPeople(Short.parseShort(player1));
 
-        listPeople(new Jugador());
-        System.out.println("Seleccione el jugador que entra:");
+        list(match.getE1Suplentes());
+        list(match.getE2Suplentes());
+        System.out.println("\nSeleccione el jugador que entra:");
         String player2 = getInput();
         Persona playerIN = controladora.searchPeople(Short.parseShort(player2));
 
