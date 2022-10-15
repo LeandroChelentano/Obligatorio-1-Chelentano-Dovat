@@ -22,6 +22,8 @@ public class Partido {
 
     private Arbitro[] arbitros = new Arbitro[3];
 
+    private String goalScorers = "";
+
 //    #region setters
     public void Id(short aId) {
         id = aId;
@@ -37,6 +39,9 @@ public class Partido {
 //    #region getters
     public short getId() {
         return id;
+    }
+    public String getGoalScorers() {
+        return goalScorers;
     }
     public short getE1Score() {
         return e1Score;
@@ -147,6 +152,20 @@ public class Partido {
         return isPlaying;
     }
     public void addPlayerToTeamOne(Jugador aPlayer, boolean isTitular) {
+        boolean numberExists = false;
+
+        for (Jugador j : e1Titulares)
+            if (j != null)
+                if (j.getNumero() == aPlayer.getNumero())
+                    numberExists = true;
+
+        for (Jugador j : e1Suplentes)
+            if (j != null)
+                if (j.getNumero() == aPlayer.getNumero())
+                    numberExists = true;
+
+        if (numberExists) return;
+
         if (isTitular) {
             for (int i = 0; i < e1Titulares.length; i++)
                 if (e1Titulares[i] == null) {
@@ -162,6 +181,20 @@ public class Partido {
         }
     }
     public void addPlayerToTeamTwo(Jugador aPlayer, boolean isTitular) {
+        boolean numberExists = false;
+
+        for (Jugador j : e2Titulares)
+            if (j != null)
+                if (j.getNumero() == aPlayer.getNumero())
+                    numberExists = true;
+
+        for (Jugador j : e2Suplentes)
+            if (j != null)
+                if (j.getNumero() == aPlayer.getNumero())
+                    numberExists = true;
+
+        if (numberExists) return;
+
         if (isTitular) {
             for (int i = 0; i < e2Titulares.length; i++)
                 if (e2Titulares[i] == null) {
@@ -194,6 +227,8 @@ public class Partido {
                 e2Suplentes[i] = null;
     }
     public void changePlayer(Jugador aEnters, Jugador aExits) {
+        if (!jugando) return;
+
         // -1 means no team
         int outTeam = -1;
         int inTeam = -1;
@@ -255,12 +290,14 @@ public class Partido {
         for (Jugador j : e1Titulares)
             if (j.getId() == aPlayer.getId()) {
                 e1Score++;
+                goalScorers += "\t" + aPlayer + "\n";
                 return;
             }
 
         for (Jugador j : e2Titulares)
             if (j.getId() == aPlayer.getId()) {
                 e2Score++;
+                goalScorers += "\t" + aPlayer + "\n";
                 return;
             }
     }
