@@ -45,19 +45,57 @@ public class Front {
         controladora.addPlayer(new Jugador((short) 29, "Aymeric", "Laporte", "Mediocentro", (short) 15, (short) 28));
         controladora.addPlayer(new Jugador((short) 30, "Hugo", "Guillamón", "Extremo izquierdo", (short) 12, (short) 22));
         controladora.addPlayer(new Jugador((short) 31, "Oscar", "Gil", "Extremo derecho", (short) 18, (short) 24));
-        controladora.addPlayer(new Jugador((short) 32, "Jordi", "Alba", "delantero", (short) 18, (short) 33));
 
+        controladora.addMatch(new Partido((short) 0, "La Bombonera", "Hoy", "20:00", "Lloviendo"));
+        Partido match = controladora.searchMatchById((short) 0);
 
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 0), true);
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 1), true);
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 2), true);
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 3), true);
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 4), true);
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 5), true);
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 6), true);
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 7), true);
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 8), true);
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 9), true);
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 10), true);
+
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 11), false);
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 12), false);
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 13), false);
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 14), false);
+        match.addPlayerToTeamOne((Jugador) controladora.searchPeople((short) 15), false);
+
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 16), true);
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 17), true);
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 18), true);
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 19), true);
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 20), true);
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 21), true);
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 22), true);
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 23), true);
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 24), true);
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 25), true);
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 26), true);
+
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 27), false);
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 28), false);
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 29), false);
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 30), false);
+        match.addPlayerToTeamTwo((Jugador) controladora.searchPeople((short) 31), false);
 
         controladora.addArbitro(new Arbitro((short) 33, "Diego", "Alba", "Arbitro Central"));
         controladora.addArbitro(new Arbitro((short) 34, "Héctor", "Baldassi", "Arbitro Lareal Derecho"));
         controladora.addArbitro(new Arbitro((short) 35, "Leandro", "Chelentano", "Arbitro Lareal Isquierdo"));
+        match.assignReferee((Arbitro) controladora.searchPeople((short) 33));
+        match.assignReferee((Arbitro) controladora.searchPeople((short) 34));
+        match.assignReferee((Arbitro) controladora.searchPeople((short) 35));
 
         controladora.addDT(new DT((short) 36, "Oscar", "Tabarez", (short) 75));
         controladora.addDT(new DT((short) 37, "Luis", "Martínez", (short) 51));
-
-
-        controladora.addMatch(new Partido((short) 0, "La Bombonera", "Hoy", "20:00", "Lloviendo"));
+        match.setE1Dt((DT) controladora.searchPeople((short) 36));
+        match.setE2Dt((DT) controladora.searchPeople((short) 37));
 
         while (running)
             showMenu();
@@ -66,16 +104,6 @@ public class Front {
     }
 
 //    #region utils
-    public static String alignLeft(String line) {
-        if (line.length() == columnWidth) return line;
-        if (line.length() > columnWidth) return line.substring(0, columnWidth);
-
-        int spacesLeft = columnWidth - line.length();
-        for (int i = 0; i < spacesLeft; i++)
-            line += " ";
-
-        return line;
-    }
     public static String[] alignLeft(String[] lines) {
         String[] toReturn = new String[lines.length];
         for (int i = 0; i < lines.length; i++) {
@@ -145,6 +173,7 @@ public class Front {
                         " 7. Iniciar",
                         " 8. Finalizar",
                         " 9. Meter gol",
+                        " 0. Hacer cambio",
                 },
         };
 
@@ -168,70 +197,77 @@ public class Front {
 
         System.out.println("\n0- Salir (Perdida de datos)");
 
-        switch (getInput()) {
-            case "11":
-                newPlayer();
-                break;
-            case "12":
-                deletePlayer();
-                break;
-            case "13":
-                listPeople(new Jugador());
-                break;
-            case "21":
-                newArbitro();
-                break;
-            case "22":
-                deleteArbitro();
-                break;
-            case "23":
-                listPeople(new Arbitro());
-                break;
-            case "31":
-                newDT();
-                break;
-            case "32":
-                deleteDT();
-                break;
-            case "33":
-                listPeople(new DT());
-                break;
-            case "41":
-                newMatch();
-                break;
-            case "42":
-                deleteMatch();
-                break;
-            case "43":
-                listMatches();
-                break;
-            case "44":
-                assignMenu();
-                break;
-            case "45":
-                unassignPlayer();
-                break;
-            case "46":
-                listMatches();
-                System.out.println("Escoja un partido:");
-                Partido match = controladora.searchMatchById(Short.parseShort(getInput()));
-                showMatch(match);
-                break;
-            case "47":
-                startMatch();
-                break;
-            case "48":
-                endMatch();
-                break;
-            case "49":
-                score();
-                break;
-            case "0":
-                running = false;
-                break;
-            default:
-                System.out.println("Opción incorrecta!");
-                break;
+        try {
+            switch (getInput()) {
+                case "11":
+                    newPlayer();
+                    break;
+                case "12":
+                    deletePlayer();
+                    break;
+                case "13":
+                    listPeople(new Jugador());
+                    break;
+                case "21":
+                    newArbitro();
+                    break;
+                case "22":
+                    deleteArbitro();
+                    break;
+                case "23":
+                    listPeople(new Arbitro());
+                    break;
+                case "31":
+                    newDT();
+                    break;
+                case "32":
+                    deleteDT();
+                    break;
+                case "33":
+                    listPeople(new DT());
+                    break;
+                case "41":
+                    newMatch();
+                    break;
+                case "42":
+                    deleteMatch();
+                    break;
+                case "43":
+                    listMatches();
+                    break;
+                case "44":
+                    assignMenu();
+                    break;
+                case "45":
+                    unassignPlayer();
+                    break;
+                case "46":
+                    listMatches();
+                    System.out.println("Escoja un partido:");
+                    Partido match = controladora.searchMatchById(Short.parseShort(getInput()));
+                    showMatch(match);
+                    break;
+                case "47":
+                    startMatch();
+                    break;
+                case "48":
+                    endMatch();
+                    break;
+                case "49":
+                    score();
+                    break;
+                case "40":
+                    changePlayer();
+                    break;
+                case "0":
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Opción incorrecta!");
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("\nHa ocurrido un error. Volvamos al menu..\n");
         }
     }
 
@@ -239,7 +275,6 @@ public class Front {
         System.out.println("Que deseas asignar?\n1. Jugador\n2. Director Tecnico\n3. Arbitro");
 
         String option = getInput();
-
         switch (option) {
             case "1":
                 assignPlayer();
@@ -258,8 +293,9 @@ public class Front {
         return scanner.next();
     }
 
-    // .toArray() returns Object[]
-    //
+    // listPeople is a method that prints in the console objects that extends Persona class
+    // as a param we receive an object, then on the loop we condition the print, doing it only if the
+    // person object class is the same as the class of the object we passed as a param
     public static void listPeople(Object neededClass) {
         System.out.println("\nListado:");
         for (Persona person : controladora.getPersonas())
@@ -269,6 +305,8 @@ public class Front {
         if (controladora.getPersonas().size() == 0)
             System.out.println("No hay elementos..");
     }
+
+    // this is a simple method that loops the list of matches and prints them
     public static void listMatches() {
         System.out.println("\nListado:");
         for (Partido match : controladora.getPartidos())
@@ -277,6 +315,8 @@ public class Front {
         if (controladora.getPartidos().size() == 0)
             System.out.println("No hay elementos..");
     }
+
+    // this method receives a match as param, and prints the players on each team
     public static void showMatch(Partido match) {
         System.out.println(match.toString());
 
@@ -290,6 +330,9 @@ public class Front {
             if (jugador != null)
                 System.out.println("\t" + jugador);
 
+        DT e1DT = match.getE1DT();
+        if (e1DT != null) System.out.println("\nArbitro equipo 1: " + e1DT);
+
         System.out.println("\nEquipo 2:\n\tTitulares:");
         for (Jugador jugador : match.getE2Titulares())
             if (jugador != null)
@@ -299,10 +342,21 @@ public class Front {
         for (Jugador jugador : match.getE2Suplentes())
             if (jugador != null)
                 System.out.println("\t" + jugador);
+
+        DT e2DT = match.getE2DT();
+        if (e2DT != null) System.out.println("\nArbitro equipo 1: " + e2DT);
+
+        System.out.println("\nArbitros:");
+        for (Arbitro referee : match.getReferees())
+            if (referee != null)
+                System.out.println("\t" + referee);
     }
 //    #endregion
 
 //    #region player
+
+    // this is the method responsible for collecting the info of the new player, then calling the controller class
+    // in order to effectively add the player
     public static void newPlayer() {
         System.out.print("\nNombre:\n> ");
         scanner.nextLine();
@@ -320,6 +374,9 @@ public class Front {
 
         controladora.addPlayer(player);
     }
+
+    // this is a simple method that calls the listPeople method in order to list all the players,
+    // sand then we select an id of one of them
     public static void deletePlayer() {
         listPeople(new Jugador());
         System.out.println("\nSeleccione el identificador del jugador a eliminar:");
@@ -330,6 +387,9 @@ public class Front {
 //    #endregion
 
 //    #region arbitro
+
+    // this is the method responsible for collecting the info of the new referee, then calling the controller class
+    // in order to effectively add the referee
     public static void newArbitro() {
         System.out.print("\nNombre:\n> ");
         scanner.nextLine();
@@ -343,6 +403,9 @@ public class Front {
 
         controladora.addArbitro(pArbitro);
     }
+
+    // this is a simple method that calls the listPeople method in order to list all the referees, and
+    // then we select an id of one of them
     public static void deleteArbitro() {
         listPeople(new Arbitro());
         System.out.println("\nSeleccione el identificador del Arbitro a eliminar:");
@@ -353,6 +416,9 @@ public class Front {
 //    #endregion
 
     //    #region DT
+
+    // this is the method responsible for collecting the info of the new DT, then calling the controller class
+    // in order to effectively add the DT
     public static void newDT() {
         System.out.print("\nNombre:\n> ");
         scanner.nextLine();
@@ -362,12 +428,13 @@ public class Front {
         System.out.print("\nEdad:\n> ");
         short age = (short) scanner.nextInt();
 
+        DT dt = new DT((short) 0, name, surname, age );
 
-
-        DT pDT = new DT((short) 0, name, surname, age );
-
-        controladora.addDT(pDT);
+        controladora.addDT(dt);
     }
+
+    // this is a simple method that calls the listPeople method in order to list all the DTs, and
+    // then we select an id of one of them
     public static void deleteDT() {
         listPeople(new DT());
         System.out.println("\nSeleccione el identificador del DT a eliminar:");
@@ -378,6 +445,9 @@ public class Front {
 //    #endregion
 
 //    #region match
+
+    // this is the method responsible for collecting the info of the new match, then calling the controller class
+    // in order to effectively add the new match
     public static void newMatch() {
         System.out.print("\nEstadio:\n> ");
         scanner.nextLine();
@@ -393,6 +463,9 @@ public class Front {
 
         controladora.addMatch(partido);
     }
+
+    // this is a simple method that calls the listPeople method in order to list all the matches, and
+    // then we select an id of one of them
     public static void deleteMatch() {
         listMatches();
         System.out.println("\nSeleccione el identificador del partido a eliminar:");
@@ -400,6 +473,8 @@ public class Front {
 
         controladora.deleteMatch(Short.parseShort(id));
     }
+
+    // this method exists in order to select the match that we want to start
     public static void startMatch() {
         listMatches();
         System.out.println("\nSeleccione el identificador del partido a iniciar:");
@@ -407,6 +482,8 @@ public class Front {
 
         controladora.startMatch(Short.parseShort(id));
     }
+
+    // this is the method responsible for collecting the match id, in order to finish it
     public static void endMatch() {
         listMatches();
         System.out.println("\nSeleccione el identificador del partido a terminar:");
@@ -414,6 +491,8 @@ public class Front {
 
         controladora.endMatch(Short.parseShort(id));
     }
+
+    // this method collects the info in order to relate a player with a match
     public static boolean assignPlayer() {
         listMatches();
         System.out.println("Seleccione un partido:");
@@ -437,6 +516,8 @@ public class Front {
         controladora.assignPlayer(match, (Jugador) player, team, isTitular);
         return true;
     }
+
+    // this method is used when a player scores a goal
     public static boolean score() {
         listMatches();
         System.out.println("Seleccione un partido:");
@@ -453,6 +534,8 @@ public class Front {
         match.scoreGoal((Jugador) player);
         return true;
     }
+
+    // this method adds a dt to a team inside a match
     public static boolean assignDT() {
         listMatches();
         System.out.println("Seleccione un partido:");
@@ -472,6 +555,9 @@ public class Front {
         controladora.assignDT(match, (DT) dt, team);
         return true;
     }
+
+    // this method collects the match and the referee and calls the controller class
+    // in order to add a referee inside a match
     public static boolean assignReferee() {
         listMatches();
         System.out.println("Seleccione un partido:");
@@ -488,6 +574,9 @@ public class Front {
         controladora.assignReferee(match, (Arbitro) referee);
         return true;
     }
+
+    // this method collects the match and the player and calls the controller class
+    // in order to remove a player from a team inside a match
     public static boolean unassignPlayer() {
         listMatches();
         System.out.println("Seleccione un partido:");
@@ -503,6 +592,25 @@ public class Front {
 
         controladora.unassignPlayer(match, (Jugador) player);
         return true;
+    }
+
+    public static void changePlayer() {
+        listMatches();
+        System.out.println("Seleccione un partido:");
+        String matchId = getInput();
+        Partido match = controladora.searchMatchById(Short.parseShort(matchId));
+
+        listPeople(new Jugador());
+        System.out.println("Seleccione el jugador a cambiar:");
+        String player1 = getInput();
+        Persona playerOUT = controladora.searchPeople(Short.parseShort(player1));
+
+        listPeople(new Jugador());
+        System.out.println("Seleccione el jugador que entra:");
+        String player2 = getInput();
+        Persona playerIN = controladora.searchPeople(Short.parseShort(player2));
+
+        match.changePlayer((Jugador) playerIN, (Jugador) playerOUT);
     }
 //    #endregion
 }

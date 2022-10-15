@@ -8,7 +8,6 @@ public class Partido {
     private String clima;
     private boolean jugando = false;
     private boolean terminado = false;
-    private int minutosJugados = 0;
 
     private short e1Score = 0;
     private short e2Score = 0;
@@ -51,6 +50,9 @@ public class Partido {
     public DT getE2DT() {
         return e2Dt;
     }
+    public Arbitro[] getReferees() {
+        return arbitros;
+    }
     public String getEstadio() {
         return estadio;
     }
@@ -75,12 +77,16 @@ public class Partido {
     public Jugador[] getE2Suplentes() {
         return e2Suplentes;
     }
-    public boolean getJugando() {return jugando;}
-    public boolean getTerminado() {return terminado;}
-    public int getMinutosJugados() {return minutosJugados;}
+    public boolean getJugando() {
+        return jugando;
+    }
+    public boolean getTerminado() {
+        return terminado;
+    }
 //    #endregion
 
 //    #region methods
+    // this method returns the real amount of indexes filled on a given array
     public int countPeople(Persona[] arr) {
         int count = 0;
         for (Persona person : arr)
@@ -89,6 +95,7 @@ public class Partido {
         return count;
     }
     public boolean Start() {
+        // we only continue if every position is filled
         if (
                 terminado ||
                 countPeople(e1Titulares) != 11 ||
@@ -113,6 +120,8 @@ public class Partido {
         return true;
     }
     public boolean isPlayerPlaying(Jugador aPlayer) {
+        // we loop the 'titulares' and 'suplentes' on both team, searching for the player
+        // if funded we return true, otherwise we return false
         boolean isPlaying = false;
 
         for (Jugador player : e1Titulares)
@@ -220,8 +229,11 @@ public class Partido {
                 j = temp;
     }
     public void scoreGoal(Jugador aPlayer) {
+        // if the match is finished or the player is not appropriate, we stop
         if (!jugando || aPlayer == null) return;
 
+
+        // we find in which team the player is playing, and we give that team a new point
         for (Jugador j : e1Titulares)
             if (j.getId() == aPlayer.getId()) {
                 e1Score++;

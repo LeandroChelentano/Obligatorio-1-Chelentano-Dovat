@@ -34,7 +34,9 @@ public class Controladora {
     }
 //    #endregion
 
-    //    #region idGen
+//    #region idGen
+    // these methods returns a short number, unique, that is going to be an id
+
     public short getNextPersonId() {
         if (listaPersonas.size() == 0) return 0;
 
@@ -56,7 +58,7 @@ public class Controladora {
     }
 //    #endregion
 
-    //    #region players
+//    #region players
     public void addPlayer(Jugador aJugador) {
         aJugador.setId(getNextPersonId());
         listaPersonas.add(aJugador);
@@ -69,7 +71,7 @@ public class Controladora {
     }
 //    #endregion
 
-    //    #region arbitros
+//    #region arbitros
     public void addArbitro(Arbitro pArbitro) {
         pArbitro.setId(getNextPersonId());
         listaPersonas.add(pArbitro);
@@ -81,7 +83,7 @@ public class Controladora {
             listaPersonas.remove(Arbitro);
     }
 
-    //    #endregion
+//    #endregion
 //    #region DT
     public void addDT(DT pDT) {
         pDT.setId(getNextPersonId());
@@ -122,6 +124,7 @@ public class Controladora {
     }
 
     public void assignDT(Partido aMatch, DT aDt, String aTeam) {
+        // we don't continue if the DT is already assigned
         if (aMatch.getE1DT().getId() == aDt.getId() || aMatch.getE2DT().getId() == aDt.getId()) return;
 
         switch (aTeam) {
